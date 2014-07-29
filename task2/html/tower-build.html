@@ -1,0 +1,43 @@
+<html>
+<body>
+<script src="raphael-min.js"></script>
+<div id="foo" style="background-color:#000"></div>
+<script>
+    var r = Raphael('foo', 1009, 633),
+        baseL = r.path('M0 126 l126  126 l126  0   l-126 -126 l-126 0'),
+        baseR = r.path('M126 0 l126  126 l0   126  l-126 -126 l0  -126'),
+        baseT = r.rect(0, 0, 126, 126),
+        firstFloorL = r.path('M0 126 l63  63 l126  0   l-63 -63 l-126 0'),
+        firstFloorR = r.path('M126 0 l63  63 l0   126  l-63 -63 l0  -126'),
+        firstFloorT = r.rect(0, 0, 126, 126),
+        init = 145,
+        set = r.set([baseR, baseL, baseT, firstFloorL, firstFloorR, firstFloorT])
+
+    set.transform('T311,209s1,0.575 ,0,0r45,0,0')
+
+    baseL.attr({ fill:'#536782', stroke:'none' })
+    baseR.attr({ fill:'#8ea2bd', stroke:'none' })
+    baseT.attr({ fill:'#ccc', stroke:'#000' })
+    firstFloorL.attr({ fill:'#536782', stroke:'#000' })
+    firstFloorR.attr({ fill:'#8ea2bd', stroke:'#000' })
+    firstFloorT.attr({ fill:'#ccc', stroke:'#000' })
+
+    firstFloorT.animate({
+        y: -63,
+        x: -63
+    }, 2000);
+
+    firstFloorL.animate({
+        width: 200
+    }, 2000);
+
+    firstFloorR.animate({
+        y: -63,
+        x: -63
+    }, 2000);
+
+
+
+</script>
+</body>
+</html>
