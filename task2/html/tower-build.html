@@ -11,7 +11,12 @@
         firstFloorL = r.path('M0 126 l63  63 l126  0   l-63 -63 l-126 0'),
         firstFloorR = r.path('M126 0 l63  63 l0   126  l-63 -63 l0  -126'),
         firstFloorT = r.rect(0, 0, 126, 126),
-        set = r.set([baseR, baseL, baseT, firstFloorL, firstFloorR, firstFloorT])
+
+        secFloorL = r.path('M0 126 l63  63 l126  0   l-63 -63 l-126 0'),
+        secFloorR = r.path('M126 0 l63  63 l0   126  l-63 -63 l0  -126'),
+        secFloorT = r.rect(0, 0, 126, 126), 
+
+        set = r.set([baseR, baseL, baseT, firstFloorL, firstFloorR, firstFloorT, secFloorR, secFloorL, secFloorT])
 
     set.transform('T311,209s1,0.575 ,0,0r45,0,0')
 
@@ -21,16 +26,29 @@
     firstFloorL.attr({ fill:'#536782', stroke:'none' })
     firstFloorR.attr({ fill:'#8ea2bd', stroke:'none' })
     firstFloorT.attr({ fill:'#ccc', stroke:'#000' })
+    secFloorL.attr({ fill:'#536782', stroke:'none' })
+    secFloorR.attr({ fill:'#8ea2bd', stroke:'none' })
+    secFloorT.attr({ fill:'#ccc', stroke:'#000' })
 
-    firstFloorR.animate({path: 'M46 -80 l63  63 l0   126  l-63 -63 l0  -126'}, 2000)
-    firstFloorL.animate({path: 'M-80 46 l63  63 l126  0   l-63 -63 l-126 0'}, 2000)
+    var firstGrowR = Raphael.animation({path: 'M46 -80 l63  63 l0   126  l-63 -63 l0  -126'}, 2000);
+    var firstGrowL = Raphael.animation({path: 'M-80 46 l63  63 l126  0   l-63 -63 l-126 0'}, 2000);
+    var firstGrowT = Raphael.animation({y: -80, x: -80}, 2000);
 
-    firstFloorT.animate({
-        y: -80,
-        x: -80
-    }, 2000)
+    var secGrowR = Raphael.animation({path: 'M-34 -160 l63  63 l0   126  l-63 -63 l0  -126'}, 2000);
+    var secGrowL = Raphael.animation({path: 'M-160 -34 l63  63 l126  0   l-63 -63 l-126 0'}, 2000);
+    var secGrowT = Raphael.animation({y: -160, x: -160}, 2000);
 
+    firstFloorR.animate(firstGrowR);
+    firstFloorL.animate(firstGrowL);
+    firstFloorT.animate(firstGrowT);
 
+    secFloorR.animate(firstGrowR);
+    secFloorL.animate(firstGrowL);
+    secFloorT.animate(firstGrowT);
+
+    secFloorR.animate(secGrowR);
+    secFloorL.animate(secGrowL);
+    secFloorT.animate(secGrowT);
 
 </script>
 </body>
