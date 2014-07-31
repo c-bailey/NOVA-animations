@@ -1,0 +1,117 @@
+<html>
+<body>
+<script src="raphael-min.js"></script>
+<div id="foo" style="background-color:#000"></div>
+<script>
+
+    var r = Raphael('foo', 1009, 633),
+        duration = 2000,
+        squareL = 'l126  126 l126  0   l-126 -126 l-126 0',
+        squareR = 'l126  126 l0   126  l-126 -126 l0  -126',
+        
+        rectangleL = 'l63  63 l126  0   l-63 -63 l-126 0',
+        rectangleR = 'l63  63 l0   126  l-63 -63 l0  -126',
+
+        baseL = r.path('M0 126 ' + squareL),
+        baseR = r.path('M126 0 ' + squareR),
+        baseT = r.rect(0, 0, 126, 126)
+
+        firstFloorL = r.path('M0 126 ' + rectangleL),
+        firstFloorR = r.path('M126 0 ' + rectangleR),
+        firstFloorT = r.rect(0, 0, 126, 126)
+
+        secondFloorL = r.path('M0 126 ' + rectangleL),
+        secondFloorR = r.path('M126 0 ' + rectangleR),
+        secondFloorT = r.rect(0, 0, 126, 126)
+
+        topFloorL = r.path('M0 126 ' + rectangleL),
+        topFloorR = r.path('M126 0 ' + rectangleR),
+        topFloorT = r.rect(0, 0, 126, 126)
+
+        indentL = r.path('M-256.5 -256.5 l94.5 0'),
+        indentR = r.path('M-256.5 -256.5 l0 94.5'),
+        indentT = r.rect(0, 0, 94.5, 94.5)
+
+        set = r.set([baseR, baseL, baseT, firstFloorL, firstFloorR, firstFloorT, secondFloorR, secondFloorL, secondFloorT, topFloorR, topFloorL, topFloorT, indentR, indentL, indentT])
+
+    set.transform('T311,309 s1,0.575 ,0,0r45,0,0')
+
+    baseL.attr({ fill:'#536782', stroke:'none' })
+    baseR.attr({ fill:'#8ea2bd', stroke:'none' })
+    baseT.attr({ fill:'#ccc', stroke:'none' })
+    firstFloorL.attr({ fill:'#536782', stroke:'none' })
+    firstFloorR.attr({ fill:'#8ea2bd', stroke:'none' })
+    firstFloorT.attr({ fill:'#ccc', stroke:'none' })
+    secondFloorL.attr({ fill:'#536782', stroke:'none' })
+    secondFloorR.attr({ fill:'#8ea2bd', stroke:'none' })
+    secondFloorT.attr({ fill:'#ccc', stroke:'none' })
+    topFloorL.attr({ fill:'#536782', stroke:'none' })
+    topFloorR.attr({ fill:'#8ea2bd', stroke:'none' })
+    topFloorT.attr({ fill:'#ccc', stroke:'none' })
+    indentL.attr({ fill:'#536782', stroke:'none' })
+    indentR.attr({ fill:'#8ea2bd', stroke:'none' })
+    indentT.attr({ fill:'#ccc', stroke:'none' })
+
+
+    var firstGrowR = Raphael.animation({path: 'M51 -75 ' + rectangleR}, duration,"elastic");
+    var firstGrowL = Raphael.animation({path: 'M-75 51 ' + rectangleL}, duration, "elastic");
+    var firstGrowT = Raphael.animation({y: -75, x: -75}, duration, "elastic");
+
+    var secondGrowR = Raphael.animation({path: 'M-24 -150 ' + rectangleR}, duration, "elastic");
+    var secondGrowL = Raphael.animation({path: 'M-150 -24 ' + rectangleL}, duration, "elastic");
+    var secondGrowT = Raphael.animation({y: -150, x: -150}, duration, "elastic");
+
+    var finalGrowR = Raphael.animation({path: 'M-162 -288 ' + squareR}, duration, "elastic");
+    var finalGrowL = Raphael.animation({path: 'M-288 -162 ' + squareL}, duration, "elastic");
+    var finalGrowT = Raphael.animation({y: -288, x: -288}, duration, "elastic");
+
+    var finalIndentR = Raphael.animation({path: 'M-256.5 -256.5 l94.5  94.5 l0   94.5  l-94.5 -94.5 l0  -94.5'}, duration);
+    var finalIndentL = Raphael.animation({path: 'M-256.5 -256.5 l94.5  0 l94.5  94.5    l-94.5 0  l-94.5 -94.5 '}, duration);
+    var finalIndentT = Raphael.animation({x:-162, y:-162}, duration);
+
+
+    var firstLevelUp = function() {
+        firstFloorR.animate(firstGrowR);
+        firstFloorL.animate(firstGrowL);
+        firstFloorT.animate(firstGrowT);
+
+        secondFloorR.animate(firstGrowR);
+        secondFloorL.animate(firstGrowL);
+        secondFloorT.animate(firstGrowT);
+
+        topFloorR.animate(firstGrowR);
+        topFloorL.animate(firstGrowL);
+        topFloorT.animate(firstGrowT);
+
+        indentT.animate(firstGrowT);
+    }
+    
+    var secondLevelUp = function() {
+        secondFloorR.animate(secondGrowR);
+        secondFloorL.animate(secondGrowL);
+        secondFloorT.animate(secondGrowT);
+
+        topFloorR.animate(secondGrowR);
+        topFloorL.animate(secondGrowL);
+        topFloorT.animate(secondGrowT);
+
+        indentT.animate(secondGrowT);
+    }
+    
+    var finalLevelUp = function() {
+        topFloorR.animate(finalGrowR);
+        topFloorL.animate(finalGrowL);
+        topFloorT.animate(finalGrowT);
+        indentT.animate({y: -256.5, x: -256.5}, duration, "elastic"); 
+    }
+
+    var indent = function() {
+        indentR.animate(finalIndentR);
+        indentL.animate(finalIndentL);
+        indentT.animate(finalIndentT);
+    }
+        
+
+</script>
+</body>
+</html>
