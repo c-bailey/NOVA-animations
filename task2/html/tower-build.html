@@ -5,6 +5,11 @@
 <script>
 
     var r = Raphael('foo', 1009, 633),
+
+        mainUnit = 126,
+        indentUnit = 31.5,
+        starUnit = 23.625,
+
         duration = 2000,
         squareL = 'l126  126 l126  0   l-126 -126 l-126 0',
         squareR = 'l126  126 l0   126  l-126 -126 l0  -126',
@@ -14,25 +19,30 @@
 
         baseL = r.path('M0 126 ' + squareL),
         baseR = r.path('M126 0 ' + squareR),
-        baseT = r.rect(0, 0, 126, 126)
+        baseT = r.rect(0, 0, 126, 126),
 
         firstFloorL = r.path('M0 126 ' + rectangleL),
         firstFloorR = r.path('M126 0 ' + rectangleR),
-        firstFloorT = r.rect(0, 0, 126, 126)
+        firstFloorT = r.rect(0, 0, 126, 126),
 
         secondFloorL = r.path('M0 126 ' + rectangleL),
         secondFloorR = r.path('M126 0 ' + rectangleR),
-        secondFloorT = r.rect(0, 0, 126, 126)
+        secondFloorT = r.rect(0, 0, 126, 126),
 
         topFloorL = r.path('M0 126 ' + rectangleL),
         topFloorR = r.path('M126 0 ' + rectangleR),
-        topFloorT = r.rect(0, 0, 126, 126)
+        topFloorT = r.rect(0, 0, 126, 126),
 
-        indentL = r.path('M0 126 ' + rectangleL),
-        indentR = r.path('M126 0 ' + rectangleR),
-        indentT = r.rect(0, 0, 0, 94.5)
+        indentL = r.path('M-256.5 -256.5 l94.5  0 l0  0    l-94.5 0  l0 0'),
+        indentR = r.path('M-256.5 -256.5 l0   94.5 l0  0  l0  -94.5 l0 0'),
+        indentT = r.rect(-256.5, -256.5, 94.5, 94.5),
 
-        set = r.set([baseR, baseL, baseT, firstFloorL, firstFloorR, firstFloorT, secondFloorR, secondFloorL, secondFloorT, topFloorR, topFloorL, topFloorT, indentR, indentL, indentT])
+        starCenterL = r.path('M-138.375 -114.75 l0  0 l23.625  0   l0 0 l-23.625 0'),
+        starCenterR = r.path('M-114.75 -138.375 l0  0 l0   23.625  l0 0 l0  -23.625'),
+        starCenterT = r.rect(-138.375, -138.375, 23.625, 23.625), //86.625
+        
+
+        set = r.set([baseR, baseL, baseT, firstFloorL, firstFloorR, firstFloorT, secondFloorR, secondFloorL, secondFloorT, topFloorR, topFloorL, topFloorT, indentR, indentT, indentL, starCenterR, starCenterT, starCenterL])
 
     set.transform('T311,309 s1,0.575 ,0,0r45,0,0')
 
@@ -50,7 +60,11 @@
     topFloorT.attr({ fill:'#ccc', stroke:'none' })
     indentL.attr({ fill:'#536782', stroke:'none' })
     indentR.attr({ fill:'#8ea2bd', stroke:'none' })
-    indentT.attr({ fill:'#ccc', stroke:'none' })
+    indentT.attr({ fill:'none', stroke:'none' })
+    starCenterL.attr({ fill:'#536782', stroke:'none' })
+    starCenterR.attr({ fill:'#8ea2bd', stroke:'none' })
+    starCenterT.attr({ fill:'none', stroke:'none' })
+
 
 
     var firstGrowR = Raphael.animation({path: 'M51 -75 ' + rectangleR}, duration,"elastic");
@@ -65,13 +79,13 @@
     var finalGrowL = Raphael.animation({path: 'M-288 -162 ' + squareL}, duration, "elastic");
     var finalGrowT = Raphael.animation({y: -288, x: -288}, duration, "elastic");
 
-    var indentPrepR = Raphael.animation({path: 'M-162 -256.5 l94.5  94.5 l0   94.5  l-94.5 -94.5 l0  -94.5'}, duration);
-    var indentPrepL = Raphael.animation({path: 'M-162 -256.5 l94.5 94.5 l-94.5 -94.5'}, duration);
-    var indentPrepT = Raphael.animation({x: -68.5, y:-162}, duration);
+    var finalIndentR = Raphael.animation({path: 'M-256.5 -256.5 l0   94.5 l94.5  94.5  l0  -94.5 l-94.5 -94.5 '}, duration/3);
+    var finalIndentL = Raphael.animation({path: 'M-256.5 -256.5 l94.5  0 l94.5  94.5    l-94.5 0  l-94.5 -94.5 '}, duration/3);
+    var finalIndentT = Raphael.animation({x:-162, y:-162}, duration/3);
 
-    var finalIndentR = Raphael.animation({path: 'M-256.5 -256.5 l94.5  94.5 l0   94.5  l-94.5 -94.5 l0  -94.5'}, duration);
-    var finalIndentL = Raphael.animation({path: 'M-256.5 -256.5 l94.5  94.5 l94.5  0   l-94.5 -94.5 l-94.5 0 '}, duration);
-    var finalIndentT = Raphael.animation({x:-162, width: 94.5}, duration);
+    var starUpR = Raphael.animation({path: 'M-185.625 -209.25 l70.875  70.875 l0   23.625  l-70.875 -70.875 l0  -23.625'}, duration/3);
+    var starUpL = Raphael.animation({path: 'M-209.25 -185.625 l70.875  70.875 l23.625  0   l-70.875 -70.875 l-23.625 0'}, duration/3);
+    var starUpT = Raphael.animation({x:-209.25, y:-209.25}, duration/3);
 
 
     var firstLevelUp = function() {
@@ -86,10 +100,6 @@
         topFloorR.animate(firstGrowR);
         topFloorL.animate(firstGrowL);
         topFloorT.animate(firstGrowT);
-
-        indentR.animate(firstGrowR);
-        indentL.animate(firstGrowL);
-        indentT.animate(firstGrowT);
     }
     
     var secondLevelUp = function() {
@@ -100,32 +110,26 @@
         topFloorR.animate(secondGrowR);
         topFloorL.animate(secondGrowL);
         topFloorT.animate(secondGrowT);
-
-        indentR.animate(secondGrowR);
-        indentL.animate(secondGrowL);
-        indentT.animate(secondGrowT)
     }
     
     var finalLevelUp = function() {
         topFloorR.animate(finalGrowR);
         topFloorL.animate(finalGrowL);
-        topFloorT.animate(finalGrowT);
-
-        indentR.animate(finalGrowR);
-        indentL.animate(finalGrowL);
-        indentT.animate(finalGrowT); 
-    }
-
-    var prepIndent = function() {
-        indentR.animate(indentPrepR);
-        indentL.animate(indentPrepL);
-        indentT.animate(indentPrepT);
+        topFloorT.animate(finalGrowT); 
     }
 
     var indent = function() {
+        indentT.attr({ fill:'#ccc', stroke:'none' })
         indentR.animate(finalIndentR);
         indentL.animate(finalIndentL);
         indentT.animate(finalIndentT);
+    }
+
+    var star=function() {
+        starCenterT.attr({ fill:'#ccc', stroke:'none' })
+        starCenterR.animate(starUpR);
+        starCenterL.animate(starUpL);
+        starCenterT.animate(starUpT);
     }
         
 
