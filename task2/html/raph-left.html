@@ -7,6 +7,10 @@
         baseL = r.path('M0 126 l126  126 l126  0   l-126 -126 l-126 0'),
         baseR = r.path('M126 0 l126  126 l0   126  l-126 -126 l0  -126'),
         baseT = r.rect(0, 0, 126, 126),
+        indentL = r.path('M31.5 31.5 l94.5  94.5 l94.5  0   l-94.5 -94.5 l-94.5 0'),
+        indentR = r.path('M31.5 31.5 l94.5  94.5 l0   94.5  l-94.5 -94.5 l0  -94.5'),
+        indentT = r.rect(126, 126, 94.5, 94.5),
+
         init = 115,
         init_plus = init+14,
         yinit = 600,
@@ -18,27 +22,30 @@
         recBT = r.rect(init, yinit, 14, 14),
 
 
-        set = r.set([recBL, recBR, recBT, baseR, baseL, baseT])
+        set = r.set([recBL, recBR, recBT, baseR, baseL, baseT, indentR, indentL, indentT])
 
     set.transform('T311,209s1,0.575 ,0,0r45,0,0')
 
     baseL.attr({ fill:'#536782', stroke:'none' })
     baseR.attr({ fill:'#8ea2bd', stroke:'none' })
-    baseT.attr({ fill:'#ccc', stroke:'#000' })
+    baseT.attr({ fill:'#ccc', stroke:'none' })
+    indentL.attr({ fill:'#536782', stroke:'none' })
+    indentR.attr({ fill:'#8ea2bd', stroke:'none' })
+    indentT.attr({ fill:'#ccc', stroke:'none' })
 
     recBL.attr({ fill:'#8bc948', stroke:'#8bc948' }) // left, not seen
     recBR.attr({ fill:'#8fc95b', stroke:'#8fc95b' }) // right, used
     recBT.attr({ fill:'#c7dd58', stroke:'#c7dd58' }) // top 
 
-    recBR.animate({path: 'M'+init_plus+' '+yinit_plus+' l14  14 l0   -'+height_final+'  l-14 -14 l0  '+height_final+''}, 2000)
+    // recBR.animate({path: 'M'+init_plus+' '+yinit_plus+' l14  14 l0   -'+height_final+'  l-14 -14 l0  '+height_final+''}, 2000)
 
-    recBT.animate({
-        y: 226,
-        height: height_final
-    }, 2000, function() {
-        // TODO: when this is integrated into angular, call battle_results()
-        //alert("done")
-    })
+    // recBT.animate({
+    //     y: 226,
+    //     height: height_final
+    // }, 2000, function() {
+    //     // TODO: when this is integrated into angular, call battle_results()
+    //     //alert("done")
+    // })
 
 </script>
 </body>
