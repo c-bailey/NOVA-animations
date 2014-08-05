@@ -25,11 +25,12 @@
         starCenterR = r.path('M110.25 86.625 l70.875  70.875 l0   23.625  l-70.875 -70.875 l0  -23.625'),
         starCenterT = r.rect(86.625, 86.625, 23.625, 23.625),
 
-        starSidesL = r.path('M86.625 110.25 l70.875  70.875 l23.625  0   l-70.875 -70.875 l-23.625 0'),
-        starSidesR = r.path('M110.25 86.625 l70.875  70.875 l0   23.625  l-70.875 -70.875 l0  -23.625'),
-        starSidesT = r.rect(86.625, 86.625, 23.625, 23.625),
+        starRightL = r.path('M133.775 133.775 l23.625  23.625 l47.25  0   l-23.625 -23.625 l-47.25 0'),
+        starRightR = r.path('M181.025 110.15 l23.635  23.635 l0   23.625  l-23.635 -23.635 l0  -23.625'),
+        starRightT = r.rect(133.775, 110.15, 47.25, 23.625),
+        
 
-        set = r.set([recBL, recBR, recBT, baseR, baseL, baseT, indentR, indentL, indentT, starCenterR, starCenterT, starCenterL])
+        set = r.set([recBL, recBR, recBT, baseR, baseL, baseT, indentR, indentL, indentT, starCenterR, starCenterT, starCenterL, starRightR, starRightT, starRightL])
 
     set.transform('T311,209s1,0.575 ,0,0r45,0,0')
 
@@ -42,6 +43,9 @@
     starCenterL.attr({ fill:'#536782', stroke:'none' })
     starCenterR.attr({ fill:'#8ea2bd', stroke:'none' })
     starCenterT.attr({ fill:'#ccc', stroke:'none' })
+    starRightL.attr({ fill:'#536782', stroke:'#000' })
+    starRightR.attr({ fill:'#8ea2bd', stroke:'#000' })
+    starRightT.attr({ fill:'#ccc', stroke:'none' })
 
     // recBL.attr({ fill:'#8bc948', stroke:'#8bc948' }) // left, not seen
     // recBR.attr({ fill:'#8fc95b', stroke:'#8fc95b' }) // right, used
