@@ -6,36 +6,45 @@
 
     var r = Raphael('foo', 1009, 633),
 
+        originX = 0
+        originY = 126
+
         mainUnit = 126,
-        indentUnit = 31.5,
         starUnit = 23.625,
 
-        duration = 2000,
-        squareL = 'l126  126 l126  0   l-126 -126 l-126 0',
-        squareR = 'l126  126 l0   126  l-126 -126 l0  -126',
-        
-        rectangleL = 'l63  63 l126  0   l-63 -63 l-126 0',
-        rectangleR = 'l63  63 l0   126  l-63 -63 l0  -126',
+        midFloorHeight = mainUnit*2/3,
+        indentUnit = mainUnit/3,
 
-        baseL = r.path('M0 126 ' + squareL),
-        baseR = r.path('M126 0 ' + squareR),
+        indentHeight = mainUnit-indentUnit,
+
+        jumpHeight = -(midFloorHeight+10),
+
+        duration = 2000,
+        squareL = 'l' + mainUnit + '  ' + mainUnit + ' l' + mainUnit + '  0   l-' + mainUnit + ' -' + mainUnit + ' l-' + mainUnit + ' 0',
+        squareR = 'l' + mainUnit + '  ' + mainUnit + ' l0   ' + mainUnit + '  l-' + mainUnit + ' -' + mainUnit + ' l0  -' + mainUnit + '',
+        
+        rectangleL = 'l' + midFloorHeight + '  ' + midFloorHeight + ' l' + mainUnit + '  0   l-' + midFloorHeight + ' -' + midFloorHeight + ' l-' + mainUnit + ' 0',
+        rectangleR = 'l' + midFloorHeight + '  ' + midFloorHeight + ' l0   ' + mainUnit + '  l-' + midFloorHeight + ' -' + midFloorHeight + ' l0  -' + mainUnit + '',
+
+        baseL = r.path('M' + originX + ' ' + originY + ' ' + squareL),
+        baseR = r.path('M' + originY + ' ' + originX + ' ' + squareR),
         baseT = r.rect(0, 0, 126, 126),
 
-        firstFloorL = r.path('M0 126 ' + rectangleL),
-        firstFloorR = r.path('M126 0 ' + rectangleR),
+        firstFloorL = r.path('M' + originX + ' ' + originY + ' ' + rectangleL),
+        firstFloorR = r.path('M' + originY + ' ' + originX + ' ' + rectangleR),
         firstFloorT = r.rect(0, 0, 126, 126),
 
-        secondFloorL = r.path('M0 126 ' + rectangleL),
-        secondFloorR = r.path('M126 0 ' + rectangleR),
+        secondFloorL = r.path('M' + originX + ' ' + originY + ' ' + rectangleL),
+        secondFloorR = r.path('M' + originY + ' ' + originX + ' ' + rectangleR),
         secondFloorT = r.rect(0, 0, 126, 126),
 
-        topFloorL = r.path('M0 126 ' + rectangleL),
-        topFloorR = r.path('M126 0 ' + rectangleR),
+        topFloorL = r.path('M' + originX + ' ' + originY + ' ' + rectangleL),
+        topFloorR = r.path('M' + originY + ' ' + originX + ' ' + rectangleR),
         topFloorT = r.rect(0, 0, 126, 126),
 
-        indentL = r.path('M-256.5 -256.5 l94.5  0 l0  0    l-94.5 0  l0 0'),
-        indentR = r.path('M-256.5 -256.5 l0   94.5 l0  0  l0  -94.5 l0 0'),
-        indentT = r.rect(-256.5, -256.5, 94.5, 94.5),
+        indentL = r.path('M-256.5 -256.5 l' + indentHeight + '  0 l0  0    l-' + indentHeight + ' 0  l0 0'),
+        indentR = r.path('M-256.5 -256.5 l0   ' + indentHeight + ' l0  0  l0  -' + indentHeight + ' l0 0'),
+        indentT = r.rect(-256.5, -256.5, indentHeight , indentHeight ),
 
         starCenterL = r.path('M-138.375 -114.75 l0  0 l23.625  0   l0 0 l-23.625 0'),
         starCenterR = r.path('M-114.75 -138.375 l0  0 l0   23.625  l0 0 l0  -23.625'),
@@ -67,24 +76,28 @@
 
 
 
-    var firstGrowR = Raphael.animation({path: 'M51 -75 ' + rectangleR}, duration,"elastic");
-    var firstGrowL = Raphael.animation({path: 'M-75 51 ' + rectangleL}, duration, "elastic");
-    var firstGrowT = Raphael.animation({y: -75, x: -75}, duration, "elastic");
+    
+    var firstGrowL = Raphael.animation({path: 'M' + (originX+jumpHeight) + ' ' + (originY+jumpHeight) + ' ' + rectangleL}, duration, "elastic");
+    var firstGrowR = Raphael.animation({path: 'M' + (originY+jumpHeight) + ' ' + (originX+jumpHeight) + ' ' + rectangleR}, duration,"elastic");
+    var firstGrowT = Raphael.animation({y: (originX + jumpHeight), x: (originX + jumpHeight)}, duration, "elastic");
 
-    var secondGrowR = Raphael.animation({path: 'M-24 -150 ' + rectangleR}, duration, "elastic");
-    var secondGrowL = Raphael.animation({path: 'M-150 -24 ' + rectangleL}, duration, "elastic");
-    var secondGrowT = Raphael.animation({y: -150, x: -150}, duration, "elastic");
+    var secondGrowL = Raphael.animation({path: 'M' + (originX+2*jumpHeight) + ' ' + (originY+ 2*jumpHeight) + ' ' + rectangleL}, duration, "elastic");
+    var secondGrowR = Raphael.animation({path: 'M' + (originY+2*jumpHeight) + ' ' + (originX+ 2*jumpHeight) + ' ' + rectangleR}, duration,"elastic");
+    var secondGrowT = Raphael.animation({y: (originX + 2*jumpHeight), x: (originX + 2*jumpHeight)}, duration, "elastic");
 
-    var finalGrowR = Raphael.animation({path: 'M-162 -288 ' + squareR}, duration, "elastic");
-    var finalGrowL = Raphael.animation({path: 'M-288 -162 ' + squareL}, duration, "elastic");
-    var finalGrowT = Raphael.animation({y: -288, x: -288}, duration, "elastic");
+    
+    var finalGrowL = Raphael.animation({path: 'M' + (originX+3*jumpHeight - mainUnit/3) + ' ' + (originY+ 3*jumpHeight - mainUnit/3) + ' ' + squareL}, duration, "elastic");
+    var finalGrowR = Raphael.animation({path: 'M' + (originY+3*jumpHeight - mainUnit/3) + ' ' + (originX+ 3*jumpHeight - mainUnit/3) + ' ' + squareR}, duration, "elastic");
+    var finalGrowT = Raphael.animation({y: (originX + 3*jumpHeight - mainUnit/3), x: (originX + 3*jumpHeight - mainUnit/3)}, duration, "elastic");
 
-    var finalIndentR = Raphael.animation({path: 'M-256.5 -256.5 l0   94.5 l94.5  94.5  l0  -94.5 l-94.5 -94.5 '}, duration/3);
-    var finalIndentL = Raphael.animation({path: 'M-256.5 -256.5 l94.5  0 l94.5  94.5    l-94.5 0  l-94.5 -94.5 '}, duration/3);
+    
+    var finalIndentL = Raphael.animation({path: 'M-256.5 -256.5 l' + indentHeight + '  0 l' + indentHeight + '  ' + indentHeight + '    l-' + indentHeight + ' 0  l-' + indentHeight + ' -' + indentHeight + ' '}, duration/3);
+    var finalIndentR = Raphael.animation({path: 'M-256.5 -256.5 l0   ' + indentHeight + ' l' + indentHeight + '  ' + indentHeight + '  l0  -' + indentHeight + ' l-' + indentHeight + ' -' + indentHeight + ' '}, duration/3);
     var finalIndentT = Raphael.animation({x:-162, y:-162}, duration/3);
 
-    var starUpR = Raphael.animation({path: 'M-185.625 -209.25 l70.875  70.875 l0   23.625  l-70.875 -70.875 l0  -23.625'}, duration/3);
+    
     var starUpL = Raphael.animation({path: 'M-209.25 -185.625 l70.875  70.875 l23.625  0   l-70.875 -70.875 l-23.625 0'}, duration/3);
+    var starUpR = Raphael.animation({path: 'M-185.625 -209.25 l70.875  70.875 l0   23.625  l-70.875 -70.875 l0  -23.625'}, duration/3);
     var starUpT = Raphael.animation({x:-209.25, y:-209.25}, duration/3);
 
 
