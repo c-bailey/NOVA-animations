@@ -25,6 +25,10 @@
         starCenterR = r.path('M110.25 86.625 l70.875  70.875 l0   23.625  l-70.875 -70.875 l0  -23.625'),
         starCenterT = r.rect(86.625, 86.625, 23.625, 23.625),
 
+        starSidesL = r.path('M86.625 110.25 l70.875  70.875 l23.625  0   l-70.875 -70.875 l-23.625 0'),
+        starSidesR = r.path('M110.25 86.625 l70.875  70.875 l0   23.625  l-70.875 -70.875 l0  -23.625'),
+        starSidesT = r.rect(86.625, 86.625, 23.625, 23.625),
+
         set = r.set([recBL, recBR, recBT, baseR, baseL, baseT, indentR, indentL, indentT, starCenterR, starCenterT, starCenterL])
 
     set.transform('T311,209s1,0.575 ,0,0r45,0,0')
