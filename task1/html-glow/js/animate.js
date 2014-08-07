@@ -35,7 +35,7 @@
 	randomizeGlow(fiveAnim, fiveLimits, range);
 
 	PrefixedEvent(topAnim, 'AnimationIteration', function(e){randomizeGlow(topAnim, topLimits, range)});
-	PrefixedEvent(leftAnim, 'AnimationIteration', function(e){randomizeGlow(leftAnim, leftLimits, range)});
+	PrefixedEvent(leftAnim, 'AnimationIteration', function(e){randomizeGlow(leftAnim, leftLimits, 0)});
 	PrefixedEvent(rightAnim, 'AnimationIteration', function(e){randomizeGlow(rightAnim, rightLimits, range)});
 	PrefixedEvent(fourAnim, 'AnimationIteration', function(e){randomizeGlow(fourAnim, fourLimits, range)});
 	PrefixedEvent(fiveAnim, 'AnimationIteration', function(e){randomizeGlow(fiveAnim, fiveLimits, range)});

@@ -35,7 +35,7 @@
         starLimb = 2*starUnit,
         starOrigin = starEndPt + starLimb,
 
-        duration = 2000,
+        duration = 3000,
 
         //Defining standard shapes
         squareL = 'l' + mainUnit + '  ' + mainUnit + ' l' + mainUnit + '  0   l-' + mainUnit + ' -' + mainUnit + ' l-' + mainUnit + ' 0',
@@ -82,15 +82,24 @@
         starFrontR = r.path('M' + (starOrigin+starUnit) + ' ' + (starOrigin + starUnit) + ' l' + starUnit +  ' ' + starUnit + ' l0   0  l-' + starUnit +  ' -'  + starUnit +  'l0  0'),
         starFrontT = r.rect(starOrigin, starOrigin+starUnit, starUnit, 0),
 
-        //Grouping based on top sides, left sides, bottom sides for styling
-        allTops = r.set([baseT, firstFloorT, secondFloorT, topFloorT, indentT, starCenterT,starRightT, starLeftT, starFrontT, starBackT]),
-        allLefts = r.set([baseL, firstFloorL, secondFloorL, topFloorL, indentL, starCenterL,starRightL, starLeftL, starFrontL]),
-        allRights = r.set([baseR, firstFloorR, secondFloorR, topFloorR, indentR, starCenterR,starRightR, starFrontR, starBackR]),
-        invisible = r.set([indentT, starCenterT,starFrontL, starRightR])
-        star = r.set([starCenterT,starRightT, starLeftT, starFrontT, starBackT, starCenterL,starRightL, starLeftL, starFrontL, starCenterR,starRightR, starFrontR, starBackR])
+        //Sets grouped for styling or animation
+        invisible = r.set([indentT, starCenterT,starFrontL, starRightR]),
+
+        jumpTops = r.set([topFloorT, secondFloorT, firstFloorT]),
+        jumpLefts = r.set([topFloorL, secondFloorL, firstFloorL]),
+        jumpRights = r.set([topFloorR, secondFloorR, firstFloorR]),
+
+        star = r.set([starCenterT,starRightT, starLeftT, starFrontT, starBackT, starCenterL,starRightL, starLeftL, starFrontL, starCenterR,starRightR, starFrontR, starBackR]),
+        starTops = r.set([starCenterT,starRightT, starLeftT, starFrontT, starBackT]),
+        starLefts = r.set([starCenterL,starRightL, starLeftL, starFrontL]),
+        starRights = r.set([starCenterR,starRightR, starFrontR, starBackR]),
+
+        allTops = r.set([baseT, jumpTops, indentT, starTops]),
+        allLefts = r.set([baseL, jumpLefts, indentL, starLefts]),
+        allRights = r.set([baseR, jumpRights, indentR, starRights]),
        
 
-        set = r.set([allTops, allLefts, allRights])
+        set = r.set([allTops, allLefts, allRights]);
 
 
     set.transform('T311,309 s1,0.575 ,0,0r45,0,0')
@@ -147,41 +156,39 @@
 
 
     var firstLevelUp = function() {
-        firstFloorR.animate(firstGrowR);
-        firstFloorL.animate(firstGrowL);
-        firstFloorT.animate(firstGrowT);
+        jumpRights.animate(firstGrowR);
+        jumpLefts.animate(firstGrowL);
+        jumpTops.animate(firstGrowT);
 
-        secondFloorR.animate(firstGrowR);
-        secondFloorL.animate(firstGrowL);
-        secondFloorT.animate(firstGrowT);
-
-        topFloorR.animate(firstGrowR);
-        topFloorL.animate(firstGrowL);
-        topFloorT.animate(firstGrowT);
+        jumpRights.pop();
+        jumpLefts.pop();
+        jumpTops.pop();
     }
     
     var secondLevelUp = function() {
-        secondFloorR.animate(secondGrowR);
-        secondFloorL.animate(secondGrowL);
-        secondFloorT.animate(secondGrowT);
+        jumpRights.animate(secondGrowR);
+        jumpLefts.animate(secondGrowL);
+        jumpTops.animate(secondGrowT);
 
-        topFloorR.animate(secondGrowR);
-        topFloorL.animate(secondGrowL);
-        topFloorT.animate(secondGrowT);
+        jumpRights.pop();
+        jumpLefts.pop();
+        jumpTops.pop();
     }
     
     var finalLevelUp = function() {
-        topFloorR.animate(finalGrowR);
-        topFloorL.animate(finalGrowL);
-        topFloorT.animate(finalGrowT); 
+        jumpRights.animate(finalGrowR);
+        jumpLefts.animate(finalGrowL);
+        jumpTops.animate(finalGrowT); 
 
         window.setTimeout(indent, duration);
         window.setTimeout(starUp, duration+duration/3);
         window.setTimeout(starBurst, duration+duration*2/3);
+        window.setTimeout(rotateStar, duration+duration*5/3);
     }
 
     var indent = function() {
         indentT.attr({ fill:'#ccc', stroke:'none' })
+
         indentR.animate(finalIndentR);
         indentL.animate(finalIndentL);
         indentT.animate(finalIndentT);
@@ -189,13 +196,13 @@
 
     var starUp=function() {
         starCenterT.attr({ fill:'#ccc', stroke:'none' })
+
         starCenterR.animate(starUpR);
         starCenterL.animate(starUpL);
         starCenterT.animate(starUpT);
     }
 
     var starBurst=function() {
-
         starRightR.attr({ fill:'#8ea2bd', stroke:'none' });
         starFrontL.attr({ fill:'#536782', stroke:'none' });
 
@@ -214,16 +221,16 @@
         starBackT.animate(starBurstBT);
     }
 
+    var rotateStar = function() {
+        // starTops.animate({fill: '#fff'}, duration)
+        star.animate({transform: 'T311,309 s1,0.575 ,0,0r45,0,0,r360'+(starOrigin+starUnit)+','+(starOrigin+starUnit)},duration);
+    }
+
     var fullAnimation = function() {
         firstLevelUp();
         window.setTimeout(secondLevelUp,duration);
         window.setTimeout(finalLevelUp,duration*2);
-    }
-
-    var rotateStar = function() {
-        star.animate({transform: 'T311,309 s1,0.575 ,0,0r45,0,0,r360,'+starOrigin+','+starOrigin},duration);
-    }
-        
+    }   
 
 </script>
 </body>
