@@ -1,0 +1,250 @@
+<html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src='js/animate.js'></script>
+<style type='text/css'>
+
+/*Battle Network start*/
+
+body {
+    background-color: #242424;
+}
+
+.temp-container {
+    width: 1009px;
+    height: 633px;
+    background-color: #0A1E39;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.foreground {
+    width: 1009px;
+    height: 350px;
+    position: absolute;
+    top: 306;
+    left: 0;
+    background-color: #0A1E39;
+    z-index: 1;
+}
+
+.corp-battle-network {position: absolute;}
+
+.bg-design {
+    position: absolute;
+    width: 100%;
+}
+
+.network-fade {
+    height: 26px;
+    background-image: url('images/cyber/network/bg-network-fade.png');
+    background-repeat: no-repeat;    
+}
+.network-color {
+    height: 306px;
+    background-color: #0e5497;
+    /*background-image: url('images/cyber/network/bg-network-color.png');*/
+    background-repeat: no-repeat;    
+}
+.network-base {
+    height: 425px;
+    background-image: url('images/cyber/network/bg-network-base.png');
+    background-repeat: no-repeat; 
+    top: 208px; 
+    z-index: 2;
+}
+
+/*Positioning the top glow elements*/
+#top-anim {
+    height: 1000px;
+    width: 1000px;
+    position:absolute;
+    left: -600px;
+    top: -400px;
+}
+
+/*Positioning the left glow elements*/
+#left-anim {
+    height: 1000px;
+    width: 1000px;
+    position:absolute;
+    left: -100px;
+    top: -100px;
+}
+
+/*Positioning the right glow elements*/
+#right-anim {
+    height: 1000px;
+    width: 1000px;
+    position:absolute;
+    left: 530px;
+    top: -140;
+}
+/*Positioning the fourth glow elements*/
+#four-anim {
+    height: 1000px;
+    width: 1000px;
+    position:absolute;
+    left: 100px;
+    top: -200px;
+}
+/*Positioning the fifth glow elements*/
+#five-anim {
+    height: 1000px;
+    width: 1000px;
+    position:absolute;
+    left: 600px;
+    top: -400px;
+}
+
+
+
+.green {
+    background: -moz-radial-gradient(center, ellipse cover, rgba(119,215,157,1) 0%, rgba(122,200,195,0) 50%, rgba(125,185,232,0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(119,215,157,1)), color-stop(50%,rgba(122,200,195,0)), color-stop(100%,rgba(125,185,232,0))); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover, rgba(119,215,157,1) 0%,rgba(122,200,195,0) 50%,rgba(125,185,232,0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover, rgba(119,215,157,1) 0%,rgba(122,200,195,0) 50%,rgba(125,185,232,0) 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover, rgba(119,215,157,1) 0%,rgba(122,200,195,0) 50%,rgba(125,185,232,0) 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center, rgba(119,215,157,1) 0%,rgba(122,200,195,0) 50%,rgba(125,185,232,0) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#77d79d', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.tan {
+    background: -moz-radial-gradient(center, ellipse cover,  rgba(222,200,147,1) 0%, rgba(174,193,190,0) 50%, rgba(125,185,232,0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(222,200,147,1)), color-stop(50%,rgba(174,193,190,0)), color-stop(100%,rgba(125,185,232,0))); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  rgba(222,200,147,1) 0%,rgba(174,193,190,0) 50%,rgba(125,185,232,0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover,  rgba(222,200,147,1) 0%,rgba(174,193,190,0) 50%,rgba(125,185,232,0) 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  rgba(222,200,147,1) 0%,rgba(174,193,190,0) 50%,rgba(125,185,232,0) 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  rgba(222,200,147,1) 0%,rgba(174,193,190,0) 50%,rgba(125,185,232,0) 100%); /* W3C */
+    filter: pro/*/**/*/gid:DXImageTransform.Microsoft.gradient( startColorstr='#dec893', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.purple {
+    background: -moz-radial-gradient(center, ellipse cover,  rgba(190,124,224,1) 0%, rgba(158,155,228,0) 50%, rgba(125,185,232,0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(190,124,224,1)), color-stop(50%,rgba(158,155,228,0)), color-stop(100%,rgba(125,185,232,0))); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  rgba(190,124,224,1) 0%,rgba(158,155,228,0) 50%,rgba(125,185,232,0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover,  rgba(190,124,224,1) 0%,rgba(158,155,228,0) 50%,rgba(125,185,232,0) 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  rgba(190,124,224,1) 0%,rgba(158,155,228,0) 50%,rgba(125,185,232,0) 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  rgba(190,124,224,1) 0%,rgba(158,155,228,0) 50%,rgba(125,185,232,0) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#be7ce0', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+}
+
+.red {
+    background: -moz-radial-gradient(center, ellipse cover,  rgba(224,125,124,1) 0%, rgba(175,155,178,0) 50%, rgba(125,185,232,0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(224,125,124,1)), color-stop(50%,rgba(175,155,178,0)), color-stop(100%,rgba(125,185,232,0))); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  rgba(224,125,124,1) 0%,rgba(175,155,178,0) 50%,rgba(125,185,232,0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover,  rgba(224,125,124,1) 0%,rgba(175,155,178,0) 50%,rgba(125,185,232,0) 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  rgba(224,125,124,1) 0%,rgba(175,155,178,0) 50%,rgba(125,185,232,0) 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  rgba(224,125,124,1) 0%,rgba(175,155,178,0) 50%,rgba(125,185,232,0) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e07d7c', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+}
+
+.blue {
+    background: -moz-radial-gradient(center, ellipse cover,  rgba(125,204,224,1) 0%, rgba(125,195,228,0) 50%, rgba(125,185,232,0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(125,204,224,1)), color-stop(50%,rgba(125,195,228,0)), color-stop(100%,rgba(125,185,232,0))); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  rgba(125,204,224,1) 0%,rgba(125,195,228,0) 50%,rgba(125,185,232,0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover,  rgba(125,204,224,1) 0%,rgba(125,195,228,0) 50%,rgba(125,185,232,0) 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  rgba(125,204,224,1) 0%,rgba(125,195,228,0) 50%,rgba(125,185,232,0) 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  rgba(125,204,224,1) 0%,rgba(125,195,228,0) 50%,rgba(125,185,232,0) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7dcce0', endColorstr='#007db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+}
+
+#top-anim {
+    -webkit-animation-duration: 6.1s;
+    -moz-animation-duration: 6.1s;
+    -o-animation-duration: 6.1s;
+    animation-duration: 6.1s;
+}
+
+#left-anim {
+    -webkit-animation-duration: 15s;
+    -moz-animation-duration: 15s;
+    -o-animation-duration: 15s;
+    animation-duration: 115;
+}
+
+#right-anim {
+    -webkit-animation-duration: 8.3s;
+    -moz-animation-duration: 8.3s;
+    -o-animation-duration: 8.3s;
+    animation-duration: 8.3s;
+}
+#four-anim {
+    -webkit-animation-duration: 20.2s;
+    -moz-animation-duration: 20.2s;
+    -o-animation-duration: 20.2s;
+    animation-duration: 20.2s;
+}
+#five-anim {
+    -webkit-animation-duration: 12.1s;
+    -moz-animation-duration: 12.1s;
+    -o-animation-duration: 12.1s;
+    animation-duration: 12.1s;
+}
+
+#left-anim, #right-anim, #top-anim, #four-anim, #five-anim   {
+    -webkit-animation-name: glow;
+    -moz-animation-name: glow;
+    -o-animation-name: glow;
+    animation-name: glow;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+
+}
+
+@-webkit-keyframes glow {
+    from { opacity: 0.25}
+    50% { opacity: 0.8 }
+    to {opacity: 0.25}
+}
+
+@-moz-keyframes glow {
+    from { opacity: 0.25}
+    50% { opacity: 0.8 }
+    to {opacity: 0.25}
+}
+
+@-o-keyframes glow {
+    from { opacity: 0.25}
+    50% { opacity: 0.8 }
+    to {opacity: 0.25}
+}
+
+@keyframes glow {
+    from { opacity: 0.25}
+    50% { opacity: 0.8 }
+    to {opacity: 0.25}
+}
+
+
+</style>
+</head>
+<body>
+
+
+<div class='temp-container'>
+
+<div class='corp-battle-network bg-design network-color'>
+
+    <div class="bg-design network-base"></div>
+    <div class="foreground"></div>
+    <div id="left-anim"></div>
+    <div id="right-anim"></div>
+    <div id="top-anim"></div>
+    <div id="four-anim"></div>
+    <div id="five-anim"></div>
+    <div class="bg-design network-fade"></div>
+
+</div>
+</div>
+
+<script src='js/animate.js'></script>
+</body>
+</html>

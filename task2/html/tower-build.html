@@ -12,7 +12,6 @@
         mainUnit = 126,
         midFloorHeight = mainUnit*2/3,
         
-        
         //variables for height changes in level up animations
         jumpHeight = -(midFloorHeight+10),
         heightXOne = originX + jumpHeight,
@@ -37,11 +36,13 @@
         starOrigin = starEndPt + starLimb,
 
         duration = 2000,
+
+        //Defining standard shapes
         squareL = 'l' + mainUnit + '  ' + mainUnit + ' l' + mainUnit + '  0   l-' + mainUnit + ' -' + mainUnit + ' l-' + mainUnit + ' 0',
         squareR = 'l' + mainUnit + '  ' + mainUnit + ' l0   ' + mainUnit + '  l-' + mainUnit + ' -' + mainUnit + ' l0  -' + mainUnit + '',
-        
         rectangleL = 'l' + midFloorHeight + '  ' + midFloorHeight + ' l' + mainUnit + '  0   l-' + midFloorHeight + ' -' + midFloorHeight + ' l-' + mainUnit + ' 0',
         rectangleR = 'l' + midFloorHeight + '  ' + midFloorHeight + ' l0   ' + mainUnit + '  l-' + midFloorHeight + ' -' + midFloorHeight + ' l0  -' + mainUnit + '',
+
 
         baseL = r.path('M' + originX + ' ' + originY + ' ' + squareL),
         baseR = r.path('M' + originY + ' ' + originX + ' ' + squareR),
@@ -73,21 +74,18 @@
         starCenterR = r.path('M' + (starStartPt + starUnit) + ' ' + starStartPt + ' l0  0 l0   ' + starUnit + '  l0 0 l0  -' + starUnit + ''),
         starCenterT = r.rect(starStartPt, starStartPt, starUnit, starUnit), 
         
-        /*TODO: Make other star parts*/
         starRightL = r.path('M' + (starOrigin+starUnit) + ' ' + (starOrigin+starUnit) + ' l' + starUnit +  ' ' + starUnit + ' l0   0  l-' + starUnit +  ' -'  + starUnit +  'l0  0'),
         starRightR = r.path('M' + (starOrigin+ starUnit) + ' ' + (starOrigin) + ' l' + starUnit +  ' ' + starUnit + ' l0   ' + starUnit + '  l-' + starUnit +  ' -'  + starUnit +  'l0  -' + starUnit + ''),
         starRightT = r.rect(starOrigin+starUnit, starOrigin, 0, starUnit),
-
-        
 
         starFrontL = r.path('M' + (starOrigin) + ' ' + (starOrigin + starUnit) + ' l' + starUnit +  ' ' + starUnit + ' l' + starUnit + ' 0  l-' + starUnit +  ' -'  + starUnit +  'l-' + starUnit + ' 0'),
         starFrontR = r.path('M' + (starOrigin+starUnit) + ' ' + (starOrigin + starUnit) + ' l' + starUnit +  ' ' + starUnit + ' l0   0  l-' + starUnit +  ' -'  + starUnit +  'l0  0'),
         starFrontT = r.rect(starOrigin, starOrigin+starUnit, starUnit, 0),
 
         //Grouping based on top sides, left sides, bottom sides for styling
-        allTops = r.set([baseT, firstFloorT, secondFloorT, topFloorT, indentT, starCenterT,starRightT, starLeftT, starFrontT, starBackT])
-        allLefts = r.set([baseL, firstFloorL, secondFloorL, topFloorL, indentL, starCenterL,starRightL, starLeftL, starFrontL])
-        allRights = r.set([baseR, firstFloorR, secondFloorR, topFloorR, indentR, starCenterR,starRightR, starFrontR, starBackR])
+        allTops = r.set([baseT, firstFloorT, secondFloorT, topFloorT, indentT, starCenterT,starRightT, starLeftT, starFrontT, starBackT]),
+        allLefts = r.set([baseL, firstFloorL, secondFloorL, topFloorL, indentL, starCenterL,starRightL, starLeftL, starFrontL]),
+        allRights = r.set([baseR, firstFloorR, secondFloorR, topFloorR, indentR, starCenterR,starRightR, starFrontR, starBackR]),
         invisible = r.set([indentT, starCenterT,starFrontL, starRightR])
        
 
@@ -96,6 +94,7 @@
 
     set.transform('T311,309 s1,0.575 ,0,0r45,0,0')
 
+    //styling
     allLefts.attr({ fill:'#536782', stroke:'none' })
     allRights.attr({ fill:'#8ea2bd', stroke:'none' })
     allTops.attr({ fill:'#ccc', stroke:'none' })
@@ -106,6 +105,7 @@
     var firstGrowL = Raphael.animation({path: 'M' + heightXOne + ' ' + heightYOne + ' ' + rectangleL}, duration, "elastic");
     var firstGrowR = Raphael.animation({path: 'M' + heightYOne + ' ' + heightXOne + ' ' + rectangleR}, duration,"elastic");
     var firstGrowT = Raphael.animation({y: heightXOne, x: heightXOne}, duration, "elastic");
+
 
     var secondGrowL = Raphael.animation({path: 'M' + heightXTwo + ' ' + heightYTwo + ' ' + rectangleL}, duration, "elastic");
     var secondGrowR = Raphael.animation({path: 'M' + heightYTwo + ' ' + heightXTwo + ' ' + rectangleR}, duration,"elastic");
@@ -126,6 +126,7 @@
     var starUpR = Raphael.animation({path: 'M' + (starEndPt + starUnit) + ' ' + starEndPt + ' l' + starHeight + '  ' + starHeight + ' l0   ' + starUnit + '  l-' + starHeight + ' -' + starHeight + ' l0  -' + starUnit + ''}, duration/3);
     var starUpT = Raphael.animation({x:starEndPt, y:starEndPt}, duration/3);
 
+
     var starBurstRT = Raphael.animation({width:starLimb}, duration);
     var starBurstRR = Raphael.animation({path: 'M' + (starOrigin + starUnit + starLimb) + ' ' + (starOrigin) + ' l' + starUnit +  ' ' + starUnit + ' l0   ' + starUnit + '  l-' + starUnit +  ' -'  + starUnit +  'l0  -' + starUnit + ''}, duration);
     var starBurstRL = Raphael.animation({path: 'M' + (starOrigin+starUnit) + ' ' + (starOrigin+starUnit) + ' l' + starUnit +  ' ' + starUnit + ' l'+ starLimb +  ' 0 l-' + starUnit +  ' -'  + starUnit +  'l0  -' + starLimb}, duration);
@@ -134,12 +135,15 @@
     var starBurstLT = Raphael.animation({width:starLimb, x: starEndPt}, duration);
     var starBurstLL = Raphael.animation({path: 'M' + (starOrigin) + ' ' + (starOrigin + starUnit) + ' l' + starUnit +' '+ starUnit +' l-' + starLimb + '  0   l-'+starUnit+' -'+starUnit + ' l' + starLimb +' 0'}, duration);
 
+
     var starBurstFT = Raphael.animation({height:starLimb}, duration);
     var starBurstFL = Raphael.animation({path: 'M' + (starOrigin) + ' ' + (starOrigin + starLimb + starUnit) + ' l' + starUnit +  ' ' + starUnit + ' l' + starUnit + ' 0  l-' + starUnit +  ' -'  + starUnit +  'l-' + starUnit + ' 0'},duration);
     var starBurstFR = Raphael.animation({path: 'M' + (starOrigin+starUnit) + ' ' + (starOrigin + starUnit) + ' l' + starUnit +  ' ' + starUnit + ' l0   ' + starLimb + '  l-' + starUnit +  ' -'  + starUnit +  'l0 -'+ starLimb}, duration);
 
+
     var starBurstBT = Raphael.animation({height:starLimb, y: starEndPt}, duration);
     var starBurstBR = Raphael.animation({path: 'M' + (starOrigin+starUnit) + ' ' + (starOrigin) + ' l' + starUnit +  ' ' + starUnit + ' l0   -' + starLimb + '  l-' + starUnit +  ' -'  + starUnit +  'l0 '+ starLimb}, duration);
+
 
     var firstLevelUp = function() {
         firstFloorR.animate(firstGrowR);
