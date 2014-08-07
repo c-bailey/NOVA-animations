@@ -44,9 +44,15 @@ body {
 }
 .network-color {
     height: 306px;
-    background-color: #0e5497;
-    /*background-image: url('images/cyber/network/bg-network-color.png');*/
-    background-repeat: no-repeat;    
+    background: rgb(10,30,57); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(10,30,57,1) 0%, rgba(13,35,244,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(10,30,57,1)), color-stop(100%,rgba(13,35,244,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(10,30,57,1) 0%,rgba(13,35,244,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(10,30,57,1) 0%,rgba(13,35,244,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(10,30,57,1) 0%,rgba(13,35,244,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(10,30,57,1) 0%,rgba(13,35,244,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0a1e39', endColorstr='#0d23f4',GradientType=0 ); /* IE6-9 */
+  
 }
 .network-base {
     height: 425px;
