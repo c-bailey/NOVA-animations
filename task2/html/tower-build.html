@@ -6,17 +6,15 @@
 
     var r = Raphael('foo', 1009, 633),
 
+        //variables for original pieces
         originX = 0,
         originY = 126,
-
         mainUnit = 126,
-
         midFloorHeight = mainUnit*2/3,
-        indentUnit = mainUnit/3,
         
-
+        
+        //variables for height changes in level up animations
         jumpHeight = -(midFloorHeight+10),
-
         heightXOne = originX + jumpHeight,
         heightXTwo = originX + 2*jumpHeight,
         heightXThree = originX + 3*jumpHeight - mainUnit/3,
@@ -24,15 +22,19 @@
         heightYTwo = originY + 2*jumpHeight,
         heightYThree = originY + 3*jumpHeight - mainUnit/3,
 
+        //variables for the indentation pieces
+        indentUnit = mainUnit/3,
         indentHeight = mainUnit-indentUnit,
         indentStartPt = heightXThree+indentUnit,
         indentEndPt = indentStartPt+indentHeight,
 
-        starUnit = indentHeight/5,
-        starHeight = 4*starUnit,
+        //variables for the star pieces
+        starUnit = indentHeight/6,
+        starHeight = 5*starUnit,
         starStartPt = indentEndPt+2.5*starUnit,
         starEndPt = indentStartPt+2.5*starUnit,
-        starLimb = 1.5*starUnit,
+        starLimb = 2*starUnit,
+        starOrigin = starEndPt + starLimb,
 
         duration = 2000,
         squareL = 'l' + mainUnit + '  ' + mainUnit + ' l' + mainUnit + '  0   l-' + mainUnit + ' -' + mainUnit + ' l-' + mainUnit + ' 0',
@@ -61,32 +63,32 @@
         indentR = r.path('M' + indentStartPt + ' ' + indentStartPt + ' l0   ' + indentHeight + ' l0  0  l0  -' + indentHeight + ' l0 0'),
         indentT = r.rect(indentStartPt, indentStartPt, indentHeight , indentHeight ),
 
+        starLeftL = r.path('M' + (starOrigin) + ' ' + (starOrigin + starUnit) + ' l' + starUnit +' '+ starUnit +' l0  0   l-'+starUnit+' -'+starUnit + ' l0 0'),
+        starLeftT = r.rect(starOrigin, starOrigin, 0, starUnit),
+
+        starBackR = r.path('M' + (starOrigin+starUnit) + ' ' + (starOrigin) + ' l' + starUnit +  ' ' + starUnit + ' l0   0  l-' + starUnit +  ' -'  + starUnit +  'l0  0'),
+        starBackT = r.rect(starOrigin, starOrigin, starUnit, 0),
+
         starCenterL = r.path('M' + starStartPt + ' ' + (starStartPt + starUnit) + ' l0  0 l' + starUnit + '  0   l0 0 l-' + starUnit + ' 0'),
         starCenterR = r.path('M' + (starStartPt + starUnit) + ' ' + starStartPt + ' l0  0 l0   ' + starUnit + '  l0 0 l0  -' + starUnit + ''),
         starCenterT = r.rect(starStartPt, starStartPt, starUnit, starUnit), 
         
         /*TODO: Make other star parts*/
-        starRightL = r.path('M' + (starEndPt+starUnit+starLimb) + ' ' + (starEndPt + starLimb+starUnit) + ' l' + starUnit +  ' ' + starUnit + ' l0   0  l-' + starUnit +  ' -'  + starUnit +  'l0  0'),
-        starRightR = r.path('M' + (starEndPt + starUnit + starLimb) + ' ' + (starEndPt + starLimb) + ' l' + starUnit +  ' ' + starUnit + ' l0   ' + starUnit + '  l-' + starUnit +  ' -'  + starUnit +  'l0  -' + starUnit + ''),
-        starRightT = r.rect(starEndPt+starUnit+starLimb, starEndPt+starLimb, 0, starUnit),
+        starRightL = r.path('M' + (starOrigin+starUnit) + ' ' + (starOrigin+starUnit) + ' l' + starUnit +  ' ' + starUnit + ' l0   0  l-' + starUnit +  ' -'  + starUnit +  'l0  0'),
+        starRightR = r.path('M' + (starOrigin+ starUnit) + ' ' + (starOrigin) + ' l' + starUnit +  ' ' + starUnit + ' l0   ' + starUnit + '  l-' + starUnit +  ' -'  + starUnit +  'l0  -' + starUnit + ''),
+        starRightT = r.rect(starOrigin+starUnit, starOrigin, 0, starUnit),
 
-        starLeftL = r.path('M' + starEndPt + ' ' + (starEndPt + starUnit) + ' l0  0 l' + starUnit + '  0   l0 0 l-' + starUnit + ' 0'),
-        starLeftT = r.rect(starEndPt+starUnit-starLimb, starEndPt+starLimb, 0, starUnit),
+        
 
-        starFrontL = r.path('M' + starEndPt + ' ' + (starEndPt + starUnit) + ' l0  0 l' + starUnit + '  0   l0 0 l-' + starUnit + ' 0'),
-        starFrontR = r.path('M' + (starEndPt + starUnit) + ' ' + starEndPt + ' l0  0 l0   ' + starUnit + '  l0 0 l0  -' + starUnit + ''),
-        starFrontT = r.rect(starEndPt, starEndPt, starUnit, 0),
+        starFrontL = r.path('M' + (starOrigin) + ' ' + (starOrigin + starUnit) + ' l' + starUnit +  ' ' + starUnit + ' l' + starUnit + ' 0  l-' + starUnit +  ' -'  + starUnit +  'l-' + starUnit + ' 0'),
+        starFrontR = r.path('M' + (starOrigin+starUnit) + ' ' + (starOrigin + starUnit) + ' l' + starUnit +  ' ' + starUnit + ' l0   0  l-' + starUnit +  ' -'  + starUnit +  'l0  0'),
+        starFrontT = r.rect(starOrigin, starOrigin+starUnit, starUnit, 0),
 
-        starBackR = r.path('M' + (starEndPt + starUnit) + ' ' + starEndPt + ' l0  0 l0   ' + starUnit + '  l0 0 l0  -' + starUnit + ''),
-        starBackT = r.rect(starEndPt, starEndPt, starUnit, 0),
-
-
+        //Grouping based on top sides, left sides, bottom sides for styling
         allTops = r.set([baseT, firstFloorT, secondFloorT, topFloorT, indentT, starCenterT,starRightT, starLeftT, starFrontT, starBackT])
         allLefts = r.set([baseL, firstFloorL, secondFloorL, topFloorL, indentL, starCenterL,starRightL, starLeftL, starFrontL])
         allRights = r.set([baseR, firstFloorR, secondFloorR, topFloorR, indentR, starCenterR,starRightR, starFrontR, starBackR])
         invisible = r.set([indentT, starCenterT,starFrontL, starRightR])
-
-        forplacing = r.set([starLeftT, starFrontT, starBackT, starLeftL, starFrontL, starFrontR, starBackR])
        
 
         set = r.set([allTops, allLefts, allRights])
@@ -99,9 +101,6 @@
     allTops.attr({ fill:'#ccc', stroke:'none' })
 
     invisible.attr({ fill:'none', stroke:'none' })
-    forplacing.attr({stroke: '#000'})
-
-
 
     
     var firstGrowL = Raphael.animation({path: 'M' + heightXOne + ' ' + heightYOne + ' ' + rectangleL}, duration, "elastic");
@@ -128,12 +127,19 @@
     var starUpT = Raphael.animation({x:starEndPt, y:starEndPt}, duration/3);
 
     var starBurstRT = Raphael.animation({width:starLimb}, duration);
-    var starBurstRR = Raphael.animation({path: 'M' + (starEndPt + starUnit + 2*starLimb) + ' ' + (starEndPt + starLimb) + ' l' + starUnit +  ' ' + starUnit + ' l0   ' + starUnit + '  l-' + starUnit +  ' -'  + starUnit +  'l0  -' + starUnit + ''}, duration);
-    var starBurstRL = Raphael.animation({path: 'M' + (starEndPt+starUnit+starLimb) + ' ' + (starEndPt + starLimb+starUnit) + ' l' + starUnit +  ' ' + starUnit + ' l'+ starLimb +  ' 0 l-' + starUnit +  ' -'  + starUnit +  'l0  -' + starLimb}, duration)
+    var starBurstRR = Raphael.animation({path: 'M' + (starOrigin + starUnit + starLimb) + ' ' + (starOrigin) + ' l' + starUnit +  ' ' + starUnit + ' l0   ' + starUnit + '  l-' + starUnit +  ' -'  + starUnit +  'l0  -' + starUnit + ''}, duration);
+    var starBurstRL = Raphael.animation({path: 'M' + (starOrigin+starUnit) + ' ' + (starOrigin+starUnit) + ' l' + starUnit +  ' ' + starUnit + ' l'+ starLimb +  ' 0 l-' + starUnit +  ' -'  + starUnit +  'l0  -' + starLimb}, duration);
 
 
-    var starBurstLT = Raphael.animation({width:starLimb}, duration);
+    var starBurstLT = Raphael.animation({width:starLimb, x: starEndPt}, duration);
+    var starBurstLL = Raphael.animation({path: 'M' + (starOrigin) + ' ' + (starOrigin + starUnit) + ' l' + starUnit +' '+ starUnit +' l-' + starLimb + '  0   l-'+starUnit+' -'+starUnit + ' l' + starLimb +' 0'}, duration);
 
+    var starBurstFT = Raphael.animation({height:starLimb}, duration);
+    var starBurstFL = Raphael.animation({path: 'M' + (starOrigin) + ' ' + (starOrigin + starLimb + starUnit) + ' l' + starUnit +  ' ' + starUnit + ' l' + starUnit + ' 0  l-' + starUnit +  ' -'  + starUnit +  'l-' + starUnit + ' 0'},duration);
+    var starBurstFR = Raphael.animation({path: 'M' + (starOrigin+starUnit) + ' ' + (starOrigin + starUnit) + ' l' + starUnit +  ' ' + starUnit + ' l0   ' + starLimb + '  l-' + starUnit +  ' -'  + starUnit +  'l0 -'+ starLimb}, duration);
+
+    var starBurstBT = Raphael.animation({height:starLimb, y: starEndPt}, duration);
+    var starBurstBR = Raphael.animation({path: 'M' + (starOrigin+starUnit) + ' ' + (starOrigin) + ' l' + starUnit +  ' ' + starUnit + ' l0   -' + starLimb + '  l-' + starUnit +  ' -'  + starUnit +  'l0 '+ starLimb}, duration);
 
     var firstLevelUp = function() {
         firstFloorR.animate(firstGrowR);
@@ -186,20 +192,21 @@
     var starBurst=function() {
 
         starRightR.attr({ fill:'#8ea2bd', stroke:'none' });
+        starFrontL.attr({ fill:'#536782', stroke:'none' });
 
         starRightR.animate(starBurstRR);
         starRightL.animate(starBurstRL);
         starRightT.animate(starBurstRT);
 
-        // starLeftL.animate(starBurstLL);
+        starLeftL.animate(starBurstLL);
         starLeftT.animate(starBurstLT);
 
-        // starFrontR.animate(starBurstFR);
-        // starFrontL.animate(starBurstFL);
-        // starFrontT.animate(starBurstFT);
+        starFrontR.animate(starBurstFR);
+        starFrontL.animate(starBurstFL);
+        starFrontT.animate(starBurstFT);
 
-        // starBackR.animate(starBurstBR);
-        // starBackT.animate(starBurstBT);
+        starBackR.animate(starBurstBR);
+        starBackT.animate(starBurstBT);
     }
 
     var fullAnimation = function() {
