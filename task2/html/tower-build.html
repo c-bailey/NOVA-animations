@@ -154,6 +154,9 @@
     var starBurstBT = Raphael.animation({height:starLimb, y: starEndPt}, duration);
     var starBurstBR = Raphael.animation({path: 'M' + (starOrigin+starUnit) + ' ' + (starOrigin) + ' l' + starUnit +  ' ' + starUnit + ' l0   -' + starLimb + '  l-' + starUnit +  ' -'  + starUnit +  'l0 '+ starLimb}, duration);
 
+    var starFloatUp = Raphael.animation({transform: 'T311,299 s1,0.575 ,0,0r45,0,0'},duration);
+    var starFloatDown = Raphael.animation({transform: 'T311,319 s1,0.575 ,0,0r45,0,0'},duration);
+
 
     var firstLevelUp = function() {
         jumpRights.animate(firstGrowR);
@@ -183,7 +186,8 @@
         window.setTimeout(indent, duration);
         window.setTimeout(starUp, duration+duration/3);
         window.setTimeout(starBurst, duration+duration*2/3);
-        window.setTimeout(rotateStar, duration+duration*5/3);
+        window.setTimeout(finishUp, duration+duration*5/3);
+        window.setTimeout(floatStar, duration+duration*5/3);
     }
 
     var indent = function() {
@@ -221,9 +225,15 @@
         starBackT.animate(starBurstBT);
     }
 
-    var rotateStar = function() {
-        // starTops.animate({fill: '#fff'}, duration)
-        star.animate({transform: 'T311,309 s1,0.575 ,0,0r45,0,0,r360'+(starOrigin+starUnit)+','+(starOrigin+starUnit)},duration);
+    var floatStar = function() {
+        star.animate(starFloatUp);
+        star.transform('T311,299 s1,0.575 ,0,0r45,0,0');
+        star.animate(starFloatDown.delay(duration));
+        star.transform('T311,319 s1,0.575 ,0,0r45,0,0');
+    }
+
+    var finishUp = function() {
+        window.setInterval(floatStar,duration*2);
     }
 
     var fullAnimation = function() {
