@@ -1,0 +1,64 @@
+.top-band {
+	position: relative;
+	display: block;
+	height: 115px;
+	width: 100%;
+
+	background: rgb(51,51,51); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(51,51,51,1) 0%, rgba(45,45,45,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(51,51,51,1)), color-stop(100%,rgba(45,45,45,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(51,51,51,1) 0%,rgba(45,45,45,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(51,51,51,1) 0%,rgba(45,45,45,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(51,51,51,1) 0%,rgba(45,45,45,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom, rgba(51,51,51,1) 0%,rgba(45,45,45,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#2d2d2d',GradientType=0 ); /* IE6-9 */
+	
+}
+
+.activity-info-box {
+	border-radius: 4px;
+	box-shadow: 0px 0px 5px 5px rgba(00, 00, 00, 0.1);
+
+	background: rgb(204,255,255); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(204,255,255,1) 0%, rgba(245,255,255,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(204,255,255,1)), color-stop(100%,rgba(245,255,255,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(204,255,255,1) 0%,rgba(245,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(204,255,255,1) 0%,rgba(245,255,255,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(204,255,255,1) 0%,rgba(245,255,255,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom, rgba(204,255,255,1) 0%,rgba(245,255,255,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ccffff', endColorstr='#f5ffff',GradientType=0 ); /* IE6-9 */
+}
+
+.social-info-box {
+	position: relative;
+	float: left;
+	margin-top: 10px;
+	margin-left: 13px;
+	margin-bottom: 10px;
+	width: 317px;
+	padding: 20px 16px 20px 23px;
+
+	font-family: 'Nimbus Sans';
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 21px;
+	color: #333;
+}
+
+.stat-box {
+	float: left;
+	position: relative;
+
+	margin-top: 10px;
+	margin-left: 13px;
+}
+
+.stat-info {
+	color: #ccffff;
+	font-size: 38px;
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	top: 50px;
+}
+

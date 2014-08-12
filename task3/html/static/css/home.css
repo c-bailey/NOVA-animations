@@ -1,0 +1,210 @@
+/* SINGLE COLUMN PAGES (home and lab landing pages) 
+-------------------------------------------------------------- */
+body { 
+	background: #333 url('../images/home-bg-gradient.png') repeat-x;
+	background-image: url('../images/home-bg.jpg'), url('../images/home-bg-tile.png'), url('../images/home-bg-gradient.png'); 
+	background-position: center 54px, left top, left top; 
+	background-repeat: no-repeat, repeat, repeat-x;
+	background-color: #333;
+	}
+
+.home .header {
+	height: 164px;
+	}
+	
+.home .header h1 {
+	background-image: url('../images/home-logo-novalabs.png');
+	height: 85px;
+	width: 342px;
+	margin-bottom: 14px;
+	margin-top: 9px;
+	}
+
+.home #lockheed-logo {
+	background-image: url('../images/logo-lockheed-white.png');
+	}
+
+.main-wrapper { 
+	background: transparent; 
+	overflow: visible; position: 
+	relative; z-index: 1; 
+	}
+
+.main-content-home { 
+	float: left; 
+	}
+
+/* --------------------------------------------------- Highlight Modules -------------- */
+.call-outs { 
+	clear: both; 
+	margin-bottom: 25px; 
+	}
+	
+.call-outs li { 
+	float: left; 
+	background: #000;
+	background: rgba(0,0,0,.6);
+	margin: 0 0 27px 7px;	
+	height: 315px;
+	}
+
+.lab .call-outs li {
+	background: #369;
+	background: rgba(51,102,153,.25);
+	}
+
+.call-outs li:first-child { 
+	margin: 0 0 0 0; 
+	}
+
+.call-outs li > a, 
+.call-outs li > a:visited {
+	display: block;
+	width: 232px;
+	height: 315px;
+	}
+	
+.call-outs li > a:hover { 
+	text-decoration: none; 
+	}
+
+.call-outs li > a:hover h2 {
+	text-decoration: underline;
+	}
+
+ul li .short { 
+	height: 274px !important; 
+	}
+
+/* highlight module that contains addthis - link can't extend full height of module */
+.lab .short { 
+	border-bottom: 1px solid #254b70;
+	}
+
+.addthis_toolbox { 
+	float: right; 
+	margin-top: 10px; 
+	margin-right: 0; 
+	padding-bottom: 12px; 
+	}
+
+.call-outs li > a > * { 
+	margin: 0 30px 0 15px; 
+	}
+
+.call-outs li img { 
+	margin: 0; 
+	width: 100%; 
+	height: 127px; 
+	}
+
+.call-outs a h2 { 
+	color: #99ccff; 
+	margin-bottom: 3px;
+	margin-top: 5px;
+	font-size: 106.6667%; /* 16/15 */
+	}
+
+.call-outs a p { 
+	color: #fff; 
+	font-size: 93.3333%; /* 14/15 */ 
+	line-height: 115%; /* 16/14 */
+	}
+
+/* --------------------------------------------------- Footer -------------- */
+.footer { 
+	border: none;
+	background: #000;
+	width: 896px; /*98.5248%;  935/949 */
+	padding: 38px 0 4px 79px; /* 14/949 */ 
+    margin-left: -13px;
+	}
+
+.footer ul {
+    width: 55%;
+    }
+
+#nova-logo {
+    margin-right: 134px;
+    }
+
+#footer-info-ruler {
+    margin-right: 45px;
+    }
+
+/*footer for the home page is a little different than other pages*/
+#wgbh-info { 
+	top: 130px; 
+    right: 100px;
+	}
+
+
+/* --------------------------------------------------- Carousel -------------- */
+#carousel-wrap {
+	position: relative;
+	margin-bottom: 30px;
+	}
+
+.scrollable {
+    position: relative;
+    overflow: hidden;
+    width: 949px;
+    height: 349px;
+    z-index: 0;
+	}
+
+.scrollable .items {
+    width: 20000em;
+    position: absolute;
+    clear: both;
+	}
+
+.items div {
+    float: left;
+    width: 949px;
+	}
+
+.scrollable img {
+    float: left;
+    width: 949px;
+    height: 349px;
+	}
+
+.scrollable .active {
+    position: relative;
+    cursor: default;
+	}
+
+/* Carousel Links */
+#jump {
+	position: absolute;
+	top: 149px; /* subtract 35px per additional lab */
+	right: -27px;
+	}
+
+#jump li {
+    margin-bottom: 1px;
+	}
+
+#jump a {
+	display: block;
+    width: 165px;
+    padding: 6px 0 6px 13px;
+    border: 1px solid rgba(0,0,0,.4);
+    background: #333;
+    background: rgba(0,0,0,.3);
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #9cf;
+	}
+
+#jump a:hover {
+    cursor: pointer;
+	}
+
+#jump .active a {
+    border: 1px solid rgba(0,0,0,1);
+    background: #000;
+    background: rgba(0,0,0,.8);
+    color: #fff;
+	}

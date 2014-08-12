@@ -1,0 +1,141 @@
+@page { size: letter landscape; }
+
+@media print
+  {
+  .correct { font-style: italic; font-weight: bold; }
+  }
+
+#pbs_distribution_header, 
+#pbs_distribution_header * {
+	display: none !important;
+	}
+
+body { 
+	background: #fff; 
+	}
+
+.academy .wrapper {
+	width: 812px;
+	min-width: 812px;
+	}
+
+.academy .one-col {
+	background: white;
+	width: 812px;
+	padding: 30px 40px 40px 40px;
+	}
+
+.lab-header {
+	padding-left: 247px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid #b2b2b2;
+	color: #999;
+	}
+
+.lab-header h1 { 
+	margin: 0 0 5px 0;
+	}
+
+.lab-header h2 {
+	font-size: 13px;
+	}
+
+.lab-header p {
+	font-size: 14px;
+	line-height: 1em;
+	}
+
+#print li {
+	list-style-type: none !important;
+	margin-left: 0;
+	}
+
+#print .incomplete {
+	border-bottom: 1px solid #b2b2b2;
+	padding-bottom: 15px;
+	color: #666;
+	}
+
+.lab-header + ul .incomplete { 
+	padding-top: 15px; 
+	}
+
+#print .module-container {
+	border-bottom: 1px solid #b2b2b2;
+	overflow: hidden;
+	padding-top: 24px;
+	padding-bottom: 40px;
+	}
+
+#print dl {
+	float: left;
+	clear: left;
+	width: 190px;
+	margin: 0 57px 0 0;
+	color: #666;
+	}
+
+#print dt { 
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 16px;
+	}
+
+#print dd {
+	font-size: 12px;
+	line-height: 17px;
+	}
+
+img {
+	margin: 16px 0 4px 0;
+	width: 190px;
+	height: 108px;
+	float: left;
+	}
+.quiz {
+	width: 515px;
+	float: left;
+	}
+
+#print .quiz p {
+	line-height: 18px;
+	}
+
+h2.q {
+	margin-top: 29px;
+	}
+
+.q {	
+	color: #369;
+	}
+
+#print li.correct { 
+	background-color: #c2d6c2;
+	}
+
+#print h3 {
+	font-size: 13px;
+	color: #999;
+	text-transform: none;
+	}
+
+#print .performance {
+	margin-top: 25px;
+	color: #333;
+	}
+
+#print h3 + p {
+	font-size: 13px;
+	}
+
+#print h4 {
+	font-size: 11px;
+	color: #999;
+	border-top: 1px solid #e0e0e0;
+	padding-top: 4px;
+	}
+
+#print h4 + p {
+	font-size: 11px;
+	color: #333;
+	}

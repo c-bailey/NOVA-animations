@@ -1,0 +1,170 @@
+/* --------------------------------------------------- NEW ACTIVITY SHELL PAGE -------------- */
+.activity {
+    background: #242424;
+}
+
+.activity-shell {
+    width: 1009px;
+    margin: 0 auto;
+}
+
+.activity-header {
+    height: 75px;
+}
+
+.activity-content {
+}
+
+.activity-footer {
+    font-size: 10px;
+    line-height: 12px;
+    font-family: arial, sans;
+    color: #999;
+}
+
+.activity-footer-logo {
+    display: block;
+    text-indent: -99999px;
+    direction: ltr;
+    background: url('../images/frame-labs-logo.png');
+    height: 32px;
+    width: 176px;
+    float: left;
+    margin-top: 8px;
+}
+
+.activity-footer p {
+    margin-top: 15px;
+    display: block;
+    width: 150px;
+    float: left;
+}
+
+.activity-footer p a,
+.activity-footer p a:visited {
+    color: #999;
+}
+
+
+.activity-footer-blurb-1 {
+    margin-left: 314px;
+}
+
+.activity-footer-blurb-2 {
+    margin-left: 23px;
+}
+
+.activity-footer-blurb-3 {
+    margin-left: 23px;
+}
+
+#activity-nav {
+    /* icon is 47Wx35H (70 total, for hover)*/
+    float: left;
+    height: 35px;
+    width: 47px;
+    margin: 20px 9px 0 9px;
+    background: url('../images/menu-sprite.png') 0 0;
+    cursor: pointer;
+}
+
+#activity-nav:hover,
+#activity-header .open {
+    background-position: 0 -35px;
+}
+
+#activity-nav div {
+	position: absolute;
+	z-index: 200;
+    margin-top: 35px;
+    padding: 23px;
+    padding-right: 0px;
+    visibility: hidden;
+	background: #49617a;
+}
+
+#activity-nav div ul {
+    width: 159px;
+    display: block;
+    float: left;
+    margin-right: 23px;
+}
+
+#activity-nav div ul li a {
+	color: #9cf;
+    text-transform: uppercase;
+	display: block;	
+	margin-top: -1px;
+	padding: 7px 10px 5px;
+}
+
+#activity-nav div ul li a:hover {
+    color: #fff;
+}
+
+#activity-nav:hover div,
+#activity-header .open div {
+	visibility: visible !important;
+}
+
+.grey-vrule {
+    float: left;
+    height: 45px;
+    margin-top: 15px;
+    border-right: 1px solid #353535;
+}
+
+.user-icon {
+    float: left;
+    height: 44px;
+    width: 44px;
+    margin: 15px 0 0 19px;
+}
+
+.user-info {
+    float: left;
+    margin: 24px 19px 0 9px;
+    font-size: 11px;
+    line-height: 14px;
+    color: white;
+    width: 90px;
+}
+
+.user-name {
+    font-weight: bold;
+    text-overflow: ellipsis;
+}
+
+.user-rank {
+    display: none;
+    /* JS will render this, if that lab has points */
+}
+
+.progress-bar {
+    float: left;
+    margin: 24px 0 0 19px;
+    width: 260px;
+}
+
+.progress-bar p {
+    font-size: 11px;
+    line-height: 11px;
+    text-transform: uppercase;
+    font-family: arial, sans;
+    color: #999;
+}
+
+#progress-bar {
+    width: 260px;
+    height: 13px;
+    margin-top: 9px;
+    background: #353535;
+}
+
+#progress-complete {
+    width: 0px;
+    height: 13px;
+    background: #99ccff;
+    background: rgba(153, 204, 255, 0.45);
+}
+
