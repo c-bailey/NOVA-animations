@@ -172,7 +172,7 @@
 <div class="top-band">
      <div class="">   
         <div class="activity-info-box social-info-box">
-            One of these emails is a phishing email. First, click on the differences between the two emails. (level 1)
+            One of these emails is a phishing email. First, click on the differences between the two emails.<!--  (level 1) -->
         </div>
     </div>
   
@@ -272,9 +272,9 @@
         <button ng-click="start_fake()">Next</button>
     </div>
 
-    <div class="social-modal ng-binding ng-hide" ng-show="puzzle_state.diff_failed &amp;&amp; !puzzle_state.fake_start &amp;&amp; !puzzle_state.complete">
+    <div class="social-popup" >
         You have run out of clicks. Now identify the phishing email.
-        <button ng-click="start_fake()">Next</button>
+        <button class="button button-orange">Next</button>
     </div>
 
     <div class="social-modal ng-binding ng-hide" ng-show="puzzle_state.fake_complete">
