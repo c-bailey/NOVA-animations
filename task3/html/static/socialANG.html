@@ -32,28 +32,30 @@
 			</div>
 		</div>
 
+		<!-- TODO add click functionality-->
+		<button ng-show="phish.fake && (puzzle_state.complete || puzzle_state.fake_complete)" ng-click= class="button button-orange button-social-next">Next</button>
+
 	</div>
 
-	<!--DONE up to this point-->
+	<div ng-repeat="phish in puzzle_data.phish" ng-class="{audio-content:puzzle_data.type='audio', socialcorrect: !phish.fake && (puzzle_state.complete || puzzle_state.fake_complete)}" class='social-content'>
 
+		<div ng-show="puzzle_data.type=='audio'" class="audio-box activity-content-box">
+			<p>Listen:</p>
+            <audio class="audio-player" controls="" src="audio/cyber/trip_to_space.mp3"></audio>
+		</div>
 		
 
-
-
-	<div ng-show="puzzle_data.type=='audio'"}}>
-		<audio controls ng-src="{{puzzle_data.audio_url}}"></audio>
-	</div>
-
-	<div ng-repeat="phish in puzzle_data.phish" ng-class="{audio-content:puzzle_data.type='audio', socialfake: phish.fake && (puzzle_state.complete || puzzle_state.fake_complete), socialcorrect: !phish.fake && (puzzle_state.complete || puzzle_state.fake_complete)}" class='social content' g-class="">
-
-		<img class="social-email" onmousedown='return false;' ondragstart='return false;' ng-click="wrong_click()" src="{{phish.gfx}}" alt="{{phish.gfx}}"/><br> 
-		<button ng-show="puzzle_state.fake_start && puzzle_data.type!='audio'" ng-click="select_fake($index)">fake</button>
+		<img onmousedown='return false;' ondragstart='return false;' ng-click="wrong_click()" src="{{phish.gfx}}" alt="{{phish.gfx}}"/><br> 
+		<button ng-show="puzzle_state.fake_start && puzzle_data.type!='audio'" ng-click="select_fake($index)" class="button button-orange button-phish">phish</button>
+		<img src="images/cyber/social/phish-stamp.png" class="phish-stamp" ng-show="phish.fake && puzzle_data.type!='audio' && (puzzle_state.complete || puzzle_state.fake_complete)">
+		<img src="images/cyber/social/donttrust-stamp.png" class="trust-stamp" ng-show="phish.fake && puzzle_data.type='audio' && (puzzle_state.complete || puzzle_state.fake_complete)">
 
 		<div ng-show="puzzle_state.fake_start && puzzle_data.type=='audio'">
-			<p>{{puzzle_data.instructions_fake}}</p>
-			<button ng-click=select_audio_fake(false)>Trust</button>
-			<button ng-click=select_audio_fake(true)>Not Trust</button>
+			<button ng-click=select_audio_fake(false) class="button button-orange button-trust">Trust</button>
+			<button ng-click=select_audio_fake(true) class="button button-orange button-dont-trust">Don't Trust</button>
 		</div>
+
+		
 
 		<div ng-click="highlight_click($index)" ng-repeat="hl in puzzle_data.diffs" ng-class="{found: hl.found}" class="social-highlight" style="left:
 		{{hl.x}}px;top:{{hl.y}}px;width:{{hl.w}}px;height:{{hl.h}}px;">
@@ -63,21 +65,25 @@
 	</div>
 
 	<!-- TODO: conbine these two into one --> 
-	<div class="social-modal" ng-show="puzzle_state.diff_complete && !puzzle_state.fake_start && !puzzle_state.complete">
+
+	<div class="social-modal-bg" ng-show="(puzzle_state.diff_complete || puzzle_state.diff_failed && !puzzle_state.fake_start && !puzzle_state.complete) || puzzle_state.fake_complete"></div>
+	<div class="social-modal info-box" ng-show="puzzle_state.diff_complete && !puzzle_state.fake_start && !puzzle_state.complete">
 		{{puzzle_data.interstitial_complete}}
 		<button ng-click="start_fake()" class="button button-orange button-social">Next</button>
 	</div>
 
-	<div class="social-modal" ng-show="puzzle_state.diff_failed && !puzzle_state.fake_start && !puzzle_state.complete">
+	<div class="social-modal info-box" ng-show="puzzle_state.diff_failed && !puzzle_state.fake_start && !puzzle_state.complete">
 		{{puzzle_data.interstitial_failed}}
 		<button ng-click="start_fake()" class="button button-orange button-social">Next</button>
 	</div>
 
-	<div class="social-modal" ng-show="puzzle_state.fake_complete">
+	<div class="social-modal info-box" ng-show="puzzle_state.fake_complete">
 		<span ng-show="puzzle_state.fake_pass">{{puzzle_data.whyafake_pass}}</span><span ng-hide="puzzle_state.fake_pass">{{puzzle_data.whyafake_failed}}</span>{{puzzle_data.whyafake}}
 		<button ng-click="end_fake()" class="button button-orange button-social">Next</button>
 	</div>
-	
+
+	<!--DONE up to this point (with copying)
+		NEED to make whyAfake screen-->	
 
 </div>
 

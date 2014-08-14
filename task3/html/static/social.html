@@ -149,25 +149,6 @@
 
 </div>
 
-<div class="main-corp ng-scope" ui-view=""><!-- <div ng-if="puzzle_id == 1" narrative-modal="challenge + '_intro'"></div>
- --><div ui-view="" class="ng-scope"><div ng-hide="narrativeDone" narrative-modal="narrativeSlug" class="ng-scope ng-isolate-scope"><div class="narrative-wrapper">
-    <div class="narrative-modal">
-        <div class="actor actor-c activeactor" ng-show="hasActor('C')" ng-class="{ activeactor: who == 'C', faded: fade.C }"></div>
-        <div class="actor actor-m ng-hide" ng-show="hasActor('M')" ng-class="{ activeactor: who == 'M', faded: fade.M, revealed: reveal}"></div>
-        <div class="actor-bubble bubble-left" ng-show="who == 'C' || who == 'M'"></div>
-        <div class="actor actor-p" ng-show="hasActor('P')" ng-class="{ activeactor: who == 'P' }"></div>
-        <div class="actor-bubble bubble-right ng-hide" ng-show="who == 'P'"></div>
-        <div class="actor actor-a" ng-show="hasActor('A')" ng-class="{ activeactor: who == 'A' }"></div>
-        <div class="text-box ng-binding text-box-green" ng-class="{'text-box-green': who == 'C' || who == 'M', 'text-box-black': who == 'P', 'text-box-orange': who == 'A'}">I've been getting a lot of strange emails lately.</div>
-        <div class="next-box">
-            <button class="button button-gray ng-binding" ng-click="forward()">Next</button>
-        </div>
-    </div>
-</div>
-</div>
-
-
-
 <!-- ng-show="puzzle_data.instructions" -->
 
 
@@ -199,6 +180,8 @@
             <img src="images/cyber/social/clicks-remaining-carrier.png">
             <div class="stat-info">10</div>
         </div>
+
+        <button class="button button-orange button-social-next">Next</button>
     </div>
 
 
@@ -206,15 +189,17 @@
 
     <!-- ngRepeat: phish in puzzle_data.phish -->
 
-    <div class="social-content" ng-class="audio-content:puzzle_data.type='audio'">
+    <div class="social-content audio-content">
 
-       <!--  <div class="audio-box content-box">
+        <div class="audio-box activity-content-box">
             <p>Listen:</p>
             <audio class="audio-player" controls="" src="audio/cyber/trip_to_space.mp3"></audio>
-        </div> -->
+        </div>
 
         <img  onmousedown="return false;" ondragstart="return false;" src="images/cyber/social/emailgroup01-email01.png" alt="images/cyber/social/emailgroup01-email01.png"><br> 
        <!--  <button class="button button-orange button-phish">phish</button> -->
+       <!-- <img src="images/cyber/social/phish-stamp.png" class="phish-stamp"> -->
+       <img src="images/cyber/social/donttrust-stamp.png" class="trust-stamp">
 
         <div>
             <!-- <p class="">Select the phishing email.</p> -->
@@ -239,35 +224,7 @@
             
         </div><!-- end ngRepeat: hl in puzzle_data.diffs -->
 
-    </div><!-- end ngRepeat: phish in puzzle_data.phish --><div ng-repeat="phish in puzzle_data.phish" ng-class="{socialfake: phish.fake &amp;&amp; (puzzle_state.complete || puzzle_state.fake_complete), socialcorrect: !phish.fake &amp;&amp; (puzzle_state.complete || puzzle_state.fake_complete)}" class="mockup two-col-cyber full floating social-image ng-scope">
-
-        <img class="social-email" onmousedown="return false;" ondragstart="return false;" ng-click="wrong_click()" src="images/cyber/email_real.png" alt="images/cyber/email_real.png"><br> 
-        <button class="button button-orange button-phish">phish</button>
-
-       <!--  <div>
-            <p >Select the phishing email.</p>
-            <button ng-click="select_audio_fake(false)">Trust</button>
-            <button ng-click="select_audio_fake(true)">Not Trust</button>
-        </div> -->
-
-        <!-- ngRepeat: hl in puzzle_data.diffs --><div ng-click="highlight_click($index)" ng-repeat="hl in puzzle_data.diffs" ng-class="{found: hl.found}" class="social-highlight ng-scope" style="left:
-        17px;top:13px;width:141px;height:23px;">
-            
-        </div><!-- end ngRepeat: hl in puzzle_data.diffs --><div ng-click="highlight_click($index)" ng-repeat="hl in puzzle_data.diffs" ng-class="{found: hl.found}" class="social-highlight ng-scope" style="left:
-        22px;top:100px;width:404px;height:33px;">
-            
-        </div><!-- end ngRepeat: hl in puzzle_data.diffs --><div ng-click="highlight_click($index)" ng-repeat="hl in puzzle_data.diffs" ng-class="{found: hl.found}" class="social-highlight ng-scope" style="left:
-        142px;top:148px;width:195px;height:18px;">
-            
-        </div><!-- end ngRepeat: hl in puzzle_data.diffs --><div ng-click="highlight_click($index)" ng-repeat="hl in puzzle_data.diffs" ng-class="{found: hl.found}" class="social-highlight ng-scope" style="left:
-        49px;top:238px;width:129px;height:15px;">
-            
-        </div><!-- end ngRepeat: hl in puzzle_data.diffs --><div ng-click="highlight_click($index)" ng-repeat="hl in puzzle_data.diffs" ng-class="{found: hl.found}" class="social-highlight ng-scope" style="left:
-        20px;top:263px;width:215px;height:24px;">
-            
-        </div><!-- end ngRepeat: hl in puzzle_data.diffs -->
-
-    </div><!-- end ngRepeat: phish in puzzle_data.phish -->
+    </div>
 
     <!-- TODO: conbine these two into one --> 
     <!-- <div class="social-modal-bg"></div>

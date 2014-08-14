@@ -137,7 +137,7 @@
 	width: 428px;
 }
 
-.content-box {
+.activity-content-box {
 	border-radius: 4px;
 
 	background: rgb(51,102,153); /* Old browsers */
@@ -150,15 +150,12 @@
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#336699', endColorstr='#1c3d63',GradientType=0 ); /* IE6-9 */
 }
 
-.socialfake {
-    border: 3px solid red;
-}
-
 .socialcorrect {
 	animation: fade-out 2s;
     -webkit-animation: fade-out 2s;
     -o-animation: fade-out 2s;
     -moz-animation: fade-out 2s;
+    opacity: 0;
 }
 
 @keyframes fade-out {
@@ -179,4 +176,22 @@
 @-moz-keyframes fade-out {
 	from {opacity: 1;}
 	to {opacity: 0;}
+}
+
+.phish-stamp {
+	position: absolute;
+	top: -4px;
+	right: -4px;
+}
+
+.trust-stamp {
+	position: absolute;
+	top: 132px;
+	right: -4px;
+}
+
+.button-social-next {
+	position: absolute;
+	top: 42px;
+	left: 857px;
 }
