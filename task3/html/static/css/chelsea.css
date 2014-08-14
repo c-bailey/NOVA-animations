@@ -66,7 +66,7 @@
 	top: 50px;
 }
 
-.social-email-container {
+.social-content {
 	margin-top: 13px;
 	margin-left: 13px;
 	width: 476px;
@@ -100,7 +100,7 @@
 	right: 10px;
 }
 
-.social-audio-container {
+.audio-content {
 	margin-left: 263px;
 }
 
@@ -148,5 +148,35 @@
 	background: -ms-linear-gradient(top, rgba(51,102,153,1) 0%,rgba(28,61,99,1) 100%); /* IE10+ */
 	background: linear-gradient(to bottom, rgba(51,102,153,1) 0%,rgba(28,61,99,1) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#336699', endColorstr='#1c3d63',GradientType=0 ); /* IE6-9 */
+}
 
+.socialfake {
+    border: 3px solid red;
+}
+
+.socialcorrect {
+	animation: fade-out 2s;
+    -webkit-animation: fade-out 2s;
+    -o-animation: fade-out 2s;
+    -moz-animation: fade-out 2s;
+}
+
+@keyframes fade-out {
+	from {opacity: 1;}
+	to {opacity: 0;}
+}
+
+@-webkit-keyframes fade-out {
+	from {opacity: 1;}
+	to {opacity: 0;}
+}
+
+@-o-keyframes fade-out {
+	from {opacity: 1;}
+	to {opacity: 0;}
+}
+
+@-moz-keyframes fade-out {
+	from {opacity: 1;}
+	to {opacity: 0;}
 }

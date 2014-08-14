@@ -1,0 +1,90 @@
+<div ng-hide="narrativeDone" narrative-modal="narrativeSlug"></div>
+<h2>Corp Challenge - Social</h2>
+
+<div ng-show="puzzle_state.complete">	
+	<div class='mockup two-col-cyber'>
+		stars earned: {{puzzle_state.stars}} <br>
+		<span ng-show="puzzle_state.stars>0 && newly_completed">You gained {{}} {{aUsersGained[level_id-1]}} users</span><br>
+		<button ng-click="replay()">replay</button><span ng-show="puzzle_state.stars == 0" >You have to get at least one star to continue</span>
+		<button ui-sref='corp.chooser'>Challenges</button>
+		<button ng-show="puzzle_state.stars > 0 && puzzle_id%3 != 0" ui-sref='corp.challenge.{{challenge}}({level:level_id, puzzle:puzzle_id_next})'>Next</button>
+	</div>
+</div>
+	
+
+
+<div class="social-container">
+
+	<div ng-show="puzzle_data.instructions" class="top-band">	
+		<div class="activity-info-box social-info-box">
+			{{puzzle_state.objective}}
+		</div>
+	
+		<div ng-hide="puzzle_state.fake_complete">
+			<div class='stat-box'>
+				<img src="images/cyber/social/differences-found-carrier.png">
+				<div class="stat-info">{{puzzle_state.user_clicks}} / {{puzzle_state.user_click_max}}</div>
+			</div> <!-- TO DO: create variable to store differences found -->
+
+			<div class='stat-box'>
+				<img src="images/cyber/social/clicks-remaining-carrier.png">
+				<div class="stat-info">{{puzzle_state.user_clicks}} / {{puzzle_state.user_click_max}}</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!--DONE up to this point-->
+
+		
+
+
+
+	<div ng-show="puzzle_data.type=='audio'"}}>
+		<audio controls ng-src="{{puzzle_data.audio_url}}"></audio>
+	</div>
+
+	<div ng-repeat="phish in puzzle_data.phish" ng-class="{audio-content:puzzle_data.type='audio', socialfake: phish.fake && (puzzle_state.complete || puzzle_state.fake_complete), socialcorrect: !phish.fake && (puzzle_state.complete || puzzle_state.fake_complete)}" class='social content' g-class="">
+
+		<img class="social-email" onmousedown='return false;' ondragstart='return false;' ng-click="wrong_click()" src="{{phish.gfx}}" alt="{{phish.gfx}}"/><br> 
+		<button ng-show="puzzle_state.fake_start && puzzle_data.type!='audio'" ng-click="select_fake($index)">fake</button>
+
+		<div ng-show="puzzle_state.fake_start && puzzle_data.type=='audio'">
+			<p>{{puzzle_data.instructions_fake}}</p>
+			<button ng-click=select_audio_fake(false)>Trust</button>
+			<button ng-click=select_audio_fake(true)>Not Trust</button>
+		</div>
+
+		<div ng-click="highlight_click($index)" ng-repeat="hl in puzzle_data.diffs" ng-class="{found: hl.found}" class="social-highlight" style="left:
+		{{hl.x}}px;top:{{hl.y}}px;width:{{hl.w}}px;height:{{hl.h}}px;">
+			
+		</div>
+
+	</div>
+
+	<!-- TODO: conbine these two into one --> 
+	<div class="social-modal" ng-show="puzzle_state.diff_complete && !puzzle_state.fake_start && !puzzle_state.complete">
+		{{puzzle_data.interstitial_complete}}
+		<button ng-click="start_fake()" class="button button-orange button-social">Next</button>
+	</div>
+
+	<div class="social-modal" ng-show="puzzle_state.diff_failed && !puzzle_state.fake_start && !puzzle_state.complete">
+		{{puzzle_data.interstitial_failed}}
+		<button ng-click="start_fake()" class="button button-orange button-social">Next</button>
+	</div>
+
+	<div class="social-modal" ng-show="puzzle_state.fake_complete">
+		<span ng-show="puzzle_state.fake_pass">{{puzzle_data.whyafake_pass}}</span><span ng-hide="puzzle_state.fake_pass">{{puzzle_data.whyafake_failed}}</span>{{puzzle_data.whyafake}}
+		<button ng-click="end_fake()" class="button button-orange button-social">Next</button>
+	</div>
+	
+
+</div>
+
+
+
+
+<div class='mockup two-col-cyber floating'>
+	highlight dimensions: <a href="" ng-click="calibrate()">calibrate x,y position</a> | <a href="" ng-click="puzzle_state.highlight_json='click and drag to select the highlight areas for this image. You will see the dimensions appear below. After you are done, then copy them from this display and send them to your developer.'">clear</a>
+	<p>{{puzzle_state.highlight_json}}</p>
+</div>

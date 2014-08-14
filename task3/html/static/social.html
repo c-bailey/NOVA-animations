@@ -191,7 +191,7 @@
         </div>
   
         <div class="stat-box">
-            <img src="images/cyber/social/clicks-remaining-carrier.png">
+            <img src="images/cyber/social/differences-found-carrier.png">
             <div class="stat-info">0/5</div>
         </div>
 
@@ -205,22 +205,21 @@
     
 
     <!-- ngRepeat: phish in puzzle_data.phish -->
-    <!-- ng-class="social-audio-container:puzzle_data.type='audio'" -->
 
-    <div class="social-email-container social-audio-container" >
+    <div class="social-content" ng-class="audio-content:puzzle_data.type='audio'">
 
-        <div class="audio-box content-box">
+       <!--  <div class="audio-box content-box">
             <p>Listen:</p>
             <audio class="audio-player" controls="" src="audio/cyber/trip_to_space.mp3"></audio>
-        </div>
+        </div> -->
 
         <img  onmousedown="return false;" ondragstart="return false;" src="images/cyber/social/emailgroup01-email01.png" alt="images/cyber/social/emailgroup01-email01.png"><br> 
        <!--  <button class="button button-orange button-phish">phish</button> -->
 
         <div>
             <!-- <p class="">Select the phishing email.</p> -->
-            <button class="button button-orange button-trust">Trust</button>
-            <button class="button button-orange button-dont-trust">Don't Trust</button>
+            <!-- <button class="button button-orange button-trust">Trust</button>
+            <button class="button button-orange button-dont-trust">Don't Trust</button> -->
         </div>
 
         <!-- ngRepeat: hl in puzzle_data.diffs --><div ng-click="highlight_click($index)" ng-repeat="hl in puzzle_data.diffs" ng-class="{found: hl.found}" class="social-highlight ng-scope" style="left:
@@ -245,11 +244,11 @@
         <img class="social-email" onmousedown="return false;" ondragstart="return false;" ng-click="wrong_click()" src="images/cyber/email_real.png" alt="images/cyber/email_real.png"><br> 
         <button class="button button-orange button-phish">phish</button>
 
-        <div>
+       <!--  <div>
             <p >Select the phishing email.</p>
             <button ng-click="select_audio_fake(false)">Trust</button>
             <button ng-click="select_audio_fake(true)">Not Trust</button>
-        </div>
+        </div> -->
 
         <!-- ngRepeat: hl in puzzle_data.diffs --><div ng-click="highlight_click($index)" ng-repeat="hl in puzzle_data.diffs" ng-class="{found: hl.found}" class="social-highlight ng-scope" style="left:
         17px;top:13px;width:141px;height:23px;">
