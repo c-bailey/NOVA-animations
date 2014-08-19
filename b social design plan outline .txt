@@ -1,0 +1,34 @@
+rough plan for implementing designs in social engineering:
+
+- play the social game as currently implemented:
+(you may have to go through the new user screen then paste in the url again)
+http://dipsy.pbs.org/wgbh/nova/labs/lab/cyber/research#/corp/challenge/1/social/1
+http://dipsy.pbs.org/wgbh/nova/labs/lab/cyber/research#/corp/challenge/1/social/2
+http://dipsy.pbs.org/wgbh/nova/labs/lab/cyber/research#/corp/challenge/1/social/3
+(there are more levels, but they are essentially clones of these three)
+
+- familiarize yourself with the wireframes & design for social
+
+- look at the implementation for the battle on staging to see the structure that you will need to use: http://dipsy.pbs.org/wgbh/nova/labs/lab/cyber/research#/newuser
+
+- identify the existing css that you can reuse:
+https://atlas.wgbh.org/stash/projects/NOVA/repos/nova_labs/browse/global-static/css/cyber/styles.css?at=refs%2Fheads%2Fdev
+OR
+http://dipsy.pbs.org/wgbh/nova/labs/static/css/cyber/styles.css
+
+- identify the areas of the design that will be easy for you and those areas where you think you will need help
+
+- come up with a plan for how you will tackle the design issues
+
+- get the basic structure implemented and identify the existing assets - they may inform you about how you will implement the design (do this with the step above)
+
+- learn about the functionality that is required for the activity
+https://atlas.wgbh.org/confluence/pages/viewpage.action?pageId=20579774
+
+- come up with a plan for how you will implement the javascript/css/other functionality
+
+- start to code.
+
+[in reality, we will walk through these steps together, with the mind that you will be doing the social activity and I will be doing the password activity]
+
+[we should figure out how you can use git and still have some sort of simple html structure that you can use. One way might be to render the html from the angular templates and then copy that into a flat file for working on css.]
