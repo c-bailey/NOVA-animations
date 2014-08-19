@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" media="all" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" media="all" href="css/main.css">
+    <link rel="stylesheet" type="text/css" media="all" href="css/activity.css">
+    <link rel="stylesheet" type="text/css" media="all" href="css/chelsea.css">
+    <link rel="stylesheet" type="text/css" media="all" href="css/callout.css">
+
+
+    <link rel="stylesheet" type="text/css" media="all" href="css/cyber/styles.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    
+    <script src="js/raphael-min.js"></script>
+
+</head>
+
+
+<body class="activity"> 
+
+    <div class="activity-shell">
+        <div class="activity-header">
+            <div id="activity-nav" class="dropdown">
+                <div>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        
+                        <li><a href="/lab/sun/">Sun Lab</a></li>
+                        
+                        <li><a href="/lab/energy/">Energy Lab</a></li>
+                        
+                        <li><a href="/lab/cloud/">Cloud Lab</a></li>
+                        
+                        <li><a href="/lab/rna/">RNA</a></li>
+                        
+                        <li><a href="/lab/cyber/">Cyber</a></li>
+                        
+                        <li><a href="/upcoming/">Upcoming Labs</a></li>
+                    </ul>
+                    <ul>
+                        <li>
+                        <a href="/about/">About</a>
+                        </li>
+                        <li>
+                        <a href="/scientists/">Meet Scientists</a>
+                        </li>
+                        <li>
+                        <a href="/get-involved/">Opportunities</a>
+                        </li>
+                        <li>
+                        <a href="/educators/">Educators</a>
+                        </li>
+                        <li>
+                        <a href="/social/">Social</a>
+                        </li>
+                        <li>
+                        <a href="/videos/">Videos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="grey-vrule"></div>
+            <!-- <div class="user-icon"><img class="avatar" height="44" width="44" src="/media/profile/avatars/generic-avatar_1.png" alt="NOVA Labs avatar"></div> -->
+            <div class="user-info">
+                <p class="user-name">Guest User</p>
+                <p class="user-rank">Points: <span id="user-points"></span></p>
+            </div>
+            <div class="grey-vrule"></div>
+
+            <!-- here be progress -->
+            <div class="progress-bar">
+                <p>progress</p>
+                <div id="progress-bar">
+                    <div id="progress-complete" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <p class="funder">
+                
+                
+                
+            </p>
+        </div>
+        <div class="activity-content">
+            
+
+<div ng-app="cyberApp" id="ng-app" class="ng-scope">
+    <div ui-view=""><div class="top-user-status ng-scope company-logo-2" ng-class="&quot;company-logo-&quot; + user.company">
+
+    <div class="label user-label">
+        Users
+        <span class="value ng-binding">672</span>
+    </div>
+
+    <div class="label level-label">
+        <div>Level</div>
+        <!-- ngRepeat: n in [] | range:3 --><div ng-repeat="n in [] | range:3" ng-class="{first:$index==0, done: progress.highest_level > $index}" class="level-value ng-scope first"></div><!-- end ngRepeat: n in [] | range:3 --><div ng-repeat="n in [] | range:3" ng-class="{first:$index==0, done: progress.highest_level > $index}" class="level-value ng-scope"></div><!-- end ngRepeat: n in [] | range:3 --><div ng-repeat="n in [] | range:3" ng-class="{first:$index==0, done: progress.highest_level > $index}" class="level-value ng-scope"></div><!-- end ngRepeat: n in [] | range:3 -->
+    </div>
+
+</div>
+
+	<div class="top-band"></div>
+	<div class="social-container">
+
+	    <div id="callout-canvas"></div>
+	    <script src="js/callouts.js"></script>   
+
+	    
+
+	    <div class="social-content"> 
+
+	        <img onmousedown="return false;" ondragstart="return false;" src="images/cyber/social/emailgroup01-email01.png" alt="images/cyber/social/emailgroup01-email01.png"><br> 
+	       <img src="images/cyber/social/phish-stamp.png" class="phish-stamp">
+
+	        <div class="social-highlight found" style="left:
+	        17px;top:13px;width:141px;height:23px;"></div>
+	        <div class="social-highlight found" style="left:
+	        22px;top:100px;width:404px;height:33px;"></div>
+	        <div class="social-highlight found" style="left:
+	        142px;top:148px;width:195px;height:18px;"></div>
+	        <div class="social-highlight found" style="left:
+	        49px;top:238px;width:129px;height:15px;"></div>
+	        <div class="social-highlight found" style="left:
+        	20px;top:263px;width:215px;height:24px;"></div>
+
+	    </div>
+
+	    <div class="social-content socialcorrect">
+
+	        <img onmousedown="return false;" ondragstart="return false;" src="images/cyber/social/emailgroup01-email01.png" alt="images/cyber/social/emailgroup01-email01.png"><br> 
+
+	    </div>
+
+	    
+	    <!-- shiftcallouts -->
+	    <div class="social-callouts-container calloutsIn shiftcallouts"> 
+
+            <div class="social-callout">
+                There is no padlock or https, so this is not a secure website
+            </div>
+
+            <div class="social-callout">
+                This is not a Google URL. This is not a Google URL. This is not a Google URL. This is not a Google URL. This is not a Google URL.
+            </div>
+
+            <div class="social-callout">
+                The logo is low resolution and out of date.
+            </div>
+
+            <div class="social-callout">
+                This is the wrong font. This is a poor copy of the original website, which is a common clue for phishing websites.
+            </div>
+
+            <div class="social-callout">
+                This is not Ebay. This is not Ebay. This is not Ebay. This is not Ebay. 
+            </div>
+
+        </div>
+
+</div>
+
+</div>
+
+</div>
+
+
+</body>
+
+</html>

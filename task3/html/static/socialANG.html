@@ -1,7 +1,6 @@
 <div ng-hide="narrativeDone" narrative-modal="narrativeSlug"></div>
-<h2>Corp Challenge - Social</h2>
 
-<div ng-show="puzzle_state.complete">	
+<div ng-show="puzzle_state.complete" style="position:absolute; z-index:21">	
 	<div class='mockup two-col-cyber'>
 		stars earned: {{puzzle_state.stars}} <br>
 		<span ng-show="puzzle_state.stars>0 && newly_completed">You gained {{}} {{aUsersGained[level_id-1]}} users</span><br>
@@ -12,59 +11,57 @@
 </div>
 	
 
-
-<div class="social-container">
-
-	<div ng-show="puzzle_data.instructions" class="top-band">	
+<div ng-show="puzzle_data.instructions" class="top-band">	
 		<div class="activity-info-box social-info-box">
-			{{puzzle_state.objective}}
+			<p>{{puzzle_state.objective}}</p>
 		</div>
 	
 		<div ng-hide="puzzle_state.fake_complete">
 			<div class='stat-box'>
-				<img src="images/cyber/social/differences-found-carrier.png">
-				<div class="stat-info">{{puzzle_state.user_clicks}} / {{puzzle_state.user_click_max}}</div>
+				<img src="../../static/images/cyber/social/differences-found-carrier.png">
+				<div class="stat-info">{{puzzle_state.user_diffs_found}} / {{puzzle_state.clicks_to_complete}}</div>
 			</div> <!-- TO DO: create variable to store differences found -->
 
 			<div class='stat-box'>
-				<img src="images/cyber/social/clicks-remaining-carrier.png">
-				<div class="stat-info">{{puzzle_state.user_clicks}} / {{puzzle_state.user_click_max}}</div>
+				<img src="../../static/images/cyber/social/clicks-remaining-carrier.png">
+				<div class="stat-info">{{puzzle_state.user_click_max - puzzle_state.user_clicks}}</div>
 			</div>
 		</div>
 
 		<!-- TODO add click functionality-->
-		<button ng-show="phish.fake && (puzzle_state.complete || puzzle_state.fake_complete)" ng-click= class="button button-orange button-social-next">Next</button>
+		<button ng-show="phish.fake && (puzzle_state.complete || puzzle_state.fake_complete)" class="button button-orange button-social-next">Next</button>
+</div>
 
-	</div>
+<div class="social-container">
 
-	<div ng-repeat="phish in puzzle_data.phish" ng-class="{audio-content:puzzle_data.type='audio', socialcorrect: !phish.fake && (puzzle_state.complete || puzzle_state.fake_complete)}" class='social-content'>
+	<div ng-repeat="phish in puzzle_data.phish" ng-class="{audiocontent:puzzle_data.type=='audio', socialcorrect: !phish.fake && (puzzle_state.complete || puzzle_state.fake_complete)}" class="social-content">
 
 		<div ng-show="puzzle_data.type=='audio'" class="audio-box activity-content-box">
 			<p>Listen:</p>
-            <audio class="audio-player" controls="" src="audio/cyber/trip_to_space.mp3"></audio>
+            <audio class="audio-player" controls="" src="../../static/audio/cyber/trip_to_space.mp3"></audio>
 		</div>
 		
 
 		<img onmousedown='return false;' ondragstart='return false;' ng-click="wrong_click()" src="{{phish.gfx}}" alt="{{phish.gfx}}"/><br> 
 		<button ng-show="puzzle_state.fake_start && puzzle_data.type!='audio'" ng-click="select_fake($index)" class="button button-orange button-phish">phish</button>
-		<img src="images/cyber/social/phish-stamp.png" class="phish-stamp" ng-show="phish.fake && puzzle_data.type!='audio' && (puzzle_state.complete || puzzle_state.fake_complete)">
-		<img src="images/cyber/social/donttrust-stamp.png" class="trust-stamp" ng-show="phish.fake && puzzle_data.type='audio' && (puzzle_state.complete || puzzle_state.fake_complete)">
+		<img src="../../static/images/cyber/social/phish-stamp.png" class="phish-stamp" ng-show="phish.fake && puzzle_data.type!='audio' && (puzzle_state.complete || puzzle_state.fake_complete)">
+		<img src="../../static/images/cyber/social/donttrust-stamp.png" class="trust-stamp" ng-show="phish.fake && puzzle_data.type=='audio' && (puzzle_state.complete || puzzle_state.fake_complete)">
 
 		<div ng-show="puzzle_state.fake_start && puzzle_data.type=='audio'">
 			<button ng-click=select_audio_fake(false) class="button button-orange button-trust">Trust</button>
 			<button ng-click=select_audio_fake(true) class="button button-orange button-dont-trust">Don't Trust</button>
 		</div>
 
-		
-
-		<div ng-click="highlight_click($index)" ng-repeat="hl in puzzle_data.diffs" ng-class="{found: hl.found}" class="social-highlight" style="left:
-		{{hl.x}}px;top:{{hl.y}}px;width:{{hl.w}}px;height:{{hl.h}}px;">
-			
+		<div ng-click="highlight_click($index)" ng-hide="!phish.fake && (puzzle_state.complete || puzzle_state.fake_complete)" ng-repeat="hl in puzzle_data.diffs[$index]" ng-class="{found: hl.found || puzzle_state.complete  }" class="social-highlight" style="left:
+		{{hl.x}}px;top:{{hl.y}}px;width:{{hl.w}}px;height:{{hl.h}}px;">	
 		</div>
-
 	</div>
 
-	<!-- TODO: conbine these two into one --> 
+	<div class="social-callouts-container" ng-class="shiftcallouts: puzzle_data.type!='audio' && puzzle_data.phish[0].fake, calloutsIn: !phish.fake && (puzzle_state.complete || puzzle_state.fake_complete)">
+		<div class="social-callout" ng-repeat="co in puzzle_data.callouts">{co.text}</div>
+	</div>
+
+	<!-- TODO: combine these two into one --> 
 
 	<div class="social-modal-bg" ng-show="(puzzle_state.diff_complete || puzzle_state.diff_failed && !puzzle_state.fake_start && !puzzle_state.complete) || puzzle_state.fake_complete"></div>
 	<div class="social-modal info-box" ng-show="puzzle_state.diff_complete && !puzzle_state.fake_start && !puzzle_state.complete">

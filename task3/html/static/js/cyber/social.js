@@ -1,5 +1,7 @@
 ;(function(undefined){
 
+    
+
 var socialApp = angular.module('socialApp', [])
 
 socialApp.controller('corpChallengeSocialController', [

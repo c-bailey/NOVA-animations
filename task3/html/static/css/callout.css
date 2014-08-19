@@ -1,0 +1,68 @@
+.social-container {
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+.social-callout {
+	font-family: nimbus-sans-extended, sans-serif;
+	font-size: 15px;
+	line-height: 21px;
+	color: #fff;
+	width: 353px;
+	padding: 17px;
+	margin-left: 45px;
+	margin-bottom: 30px;
+	border: 2px solid #ffcc00;
+}
+
+.social-highlight.found {
+	border: 2px solid #ffcc00;
+}
+
+.social-callouts-container {
+	position: absolute;
+	top: 13px;
+	left: 13px;
+	opacity: 0;
+}
+
+.shiftcallouts {
+	left: 502px;
+}
+
+.calloutsIn {
+	animation: fade-in 4s;
+    -webkit-animation: fade-in 4s;
+    -o-animation: fade-in 4s;
+    -moz-animation: fade-in 4s;
+    opacity: 1;
+}
+
+@keyframes fade-in {
+	from {opacity: 0;}
+	50% {opacity: 0;}
+	to {opacity: 1;}
+}
+
+@-webkit-keyframes fade-in {
+	from {opacity: 0;}
+	50% {opacity: 0;}
+	to {opacity: 1;}
+}
+
+@-o-keyframes fade-in {
+	from {opacity: 0;}
+	50% {opacity: 0;}
+	to {opacity: 1;}
+}
+
+@-moz-keyframes fade-in {
+	from {opacity: 0;}
+	50% {opacity: 0;}
+	to {opacity: 1;}
+}
+
+#callout-canvas {
+	position: absolute;
+	z-index: 3;
+}

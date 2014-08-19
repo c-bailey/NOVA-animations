@@ -5,7 +5,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
 
-    <script type="text/javascript" src="js/main.js"></script>
+
 
     <script>
         var STATIC_URL = '/static/';        
@@ -15,54 +15,19 @@
     <link rel="stylesheet" type="text/css" media="all" href="css/main.css">
     <link rel="stylesheet" type="text/css" media="all" href="css/activity.css">
     <link rel="stylesheet" type="text/css" media="all" href="css/chelsea.css">
+    <link rel="stylesheet" type="text/css" media="all" href="css/callout.css">
 
 
-<link rel="stylesheet" type="text/css" media="all" href="css/cyber/styles.css">
+    <link rel="stylesheet" type="text/css" media="all" href="css/cyber/styles.css">
 
-<!--
-<script src="/static/lib/underscore/underscore-min.js" type="text/javascript"></script>
-<script src="/static/lib/es5-shim/es5-shim.min.js" type="text/javascript"></script>
--->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
-
-<!-- <script src="/static/lib/jquery.ui.touch-punch-0.2.2/jquery.ui.touch-punch.min.js"></script>
-<script src="/static/lib/modernizer/modernizr.custom.01286.js"></script>
-<script src="/static/lib/json/json3.min.js"></script>
-<script src="/static/lib/jquery.cookie/jquery.cookie.min.js"></script>
-<script src="/static/lib/angular/angular.min.js"></script>
-<script src="/static/lib/angular/angular-ui-router.js"></script>
-<script src="/static/lib/angular/angular-resource.min.js"></script>
-<script src="/static/lib/angular/angular-animate.min.js"></script>
-<script src="/static/lib/angular/angular-cookies.min.js"></script>
-<script src="/static/lib/angular/angular-sanitize.min.js"></script>
-<script src="/static/lib/tether/tether.min.js"></script>
-<script src="/static/lib/angular-tooltip/angular-tooltip.js"></script>
-<script src="/static/lib/blockly/blockly_compressed.js"></script>
-<script src="/static/lib/blockly/blocks_compressed.js"></script>
-<script src="/static/lib/blockly/msg/js/en.js"></script>
-<script src="/static/lib/blockly/javascript_compressed.js"></script>
-<script src="/static/lib/createjs/createjs-2013.12.12.min.js"></script>
-<script src="/static/lib/raphael/raphael-min.js"></script>
-<script src="/static/lib/greensock/TweenMax.min.js"></script>
-<script src="/static/js/cyber/services.js"></script>
-<script src="/static/js/cyber/glossary.js"></script>
-<script src="/static/js/cyber/narrative.js"></script>
-<script src="/static/js/cyber/blockly.js"></script>
-<script src="/static/js/cyber/password.js"></script>
-<script src="/static/js/cyber/social.js"></script>
-<script src="/static/js/cyber/battle.js"></script>
-<script src="/static/js/cyber/battlevis.js"></script>
-<script src="/static/js/cyber/animate.js"></script>
-<script src="/static/js/cyber/app.js"></script>
-<script src="/static/js/cyber/mainapp.js"></script> -->
-
-<style>/* Removes Mobile Highlight */ *{-webkit-tap-highlight-color: rgba(0, 0, 0, 0);}</style>
-<script src="js/cyber/all.js"></script>
-
-<!-- typekit -->
-<script type="text/javascript" src="//use.typekit.net/pak0fbp.js"></script>
-<style type="text/css">.tk-nimbus-sans-extended{font-family:"nimbus-sans-extended",sans-serif;}</style><link rel="stylesheet" href="http://use.typekit.net/c/90b9b4/nimbus-sans-extended:n4:n7.SL0:F:2,SL1:F:2/d?3bb2a6e53c9684ffdc9a98f41b5b2a62781115c6cc13a8141f0e02a2ec1aca0cc3be2e8f32c68febf19e7f9573e792441ceca5ea10754edf064be26ebfb3e5bbc2f76a8e8d61eaf71e7391be4e7f7862a4f8dab9306f9d1853e71b83969f5545385fdf1eddf06a13c68a37afa72dd7ed73f2571696b5e09975304201d6db19b033181b438a3993800d94a670830f3b337f1ae955b97f969abfc0a1a825a838b52d029aba953ba3e9c465d84cf4cbdc27140d6b9ced529a39bcd21a35f09b29e232dc49223ef30393d972318ae074cceebf40160766e944f3e82b583007"><script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+    
+    <script type="text/javascript" src="js/main.js"></script>
+    <script src="js/raphael-min.js"></script>
+    <script src="js/callouts.js"></script>
+    <script src="js/cyber/all.js"></script>
+    <script src="js/cyber/social.js"></script>
 
 </head>
 
@@ -185,21 +150,21 @@
     </div>
 
 
-    
+    <div id="callout-canvas"></div>    
 
-    <!-- ngRepeat: phish in puzzle_data.phish -->
+    <!-- ngRepeat: phish in puzzle_data.phish  audio-content-->
 
-    <div class="social-content audio-content">
+    <div class="social-content"> 
 
-        <div class="audio-box activity-content-box">
+        <!-- <div class="audio-box activity-content-box">
             <p>Listen:</p>
             <audio class="audio-player" controls="" src="audio/cyber/trip_to_space.mp3"></audio>
-        </div>
+        </div> -->
 
-        <img  onmousedown="return false;" ondragstart="return false;" src="images/cyber/social/emailgroup01-email01.png" alt="images/cyber/social/emailgroup01-email01.png"><br> 
+        <img onmousedown="return false;" ondragstart="return false;" src="images/cyber/social/emailgroup01-email01.png" alt="images/cyber/social/emailgroup01-email01.png"><br> 
        <!--  <button class="button button-orange button-phish">phish</button> -->
-       <!-- <img src="images/cyber/social/phish-stamp.png" class="phish-stamp"> -->
-       <img src="images/cyber/social/donttrust-stamp.png" class="trust-stamp">
+       <img src="images/cyber/social/phish-stamp.png" class="phish-stamp">
+       <!-- <img src="images/cyber/social/donttrust-stamp.png" class="trust-stamp"> -->
 
         <div>
             <!-- <p class="">Select the phishing email.</p> -->
@@ -207,13 +172,13 @@
             <button class="button button-orange button-dont-trust">Don't Trust</button> -->
         </div>
 
-        <!-- ngRepeat: hl in puzzle_data.diffs --><div ng-click="highlight_click($index)" ng-repeat="hl in puzzle_data.diffs" ng-class="{found: hl.found}" class="social-highlight ng-scope" style="left:
+        <!-- ngRepeat: hl in puzzle_data.diffs --><div class="social-highlight found" style="left:
         17px;top:13px;width:141px;height:23px;">
             
-        </div><!-- end ngRepeat: hl in puzzle_data.diffs --><div ng-click="highlight_click($index)" ng-repeat="hl in puzzle_data.diffs" ng-class="{found: hl.found}" class="social-highlight ng-scope" style="left:
+        </div><!-- end ngRepeat: hl in puzzle_data.diffs --><div class="social-highlight found" style="left:
         22px;top:100px;width:404px;height:33px;">
             
-        </div><!-- end ngRepeat: hl in puzzle_data.diffs --><div ng-click="highlight_click($index)" ng-repeat="hl in puzzle_data.diffs" ng-class="{found: hl.found}" class="social-highlight ng-scope" style="left:
+        </div><!-- end ngRepeat: hl in puzzle_data.diffs --><div class="social-highlight found" style="left:
         142px;top:148px;width:195px;height:18px;">
             
         </div><!-- end ngRepeat: hl in puzzle_data.diffs --><div ng-click="highlight_click($index)" ng-repeat="hl in puzzle_data.diffs" ng-class="{found: hl.found}" class="social-highlight ng-scope" style="left:
@@ -225,6 +190,51 @@
         </div><!-- end ngRepeat: hl in puzzle_data.diffs -->
 
     </div>
+
+    <div class="social-content">
+
+        <img class="socialcorrect" onmousedown="return false;" ondragstart="return false;" src="images/cyber/social/emailgroup01-email01.png" alt="images/cyber/social/emailgroup01-email01.png"><br> 
+
+        <div class="social-callouts-container calloutsIn"> 
+
+            <!-- <div class="audio-box activity-content-box">
+                <p>Listen:</p>
+                <audio class="audio-player" controls="" src="audio/cyber/trip_to_space.mp3"></audio>
+            </div> -->
+
+            <!-- <img  onmousedown="return false;" ondragstart="return false;" src="images/cyber/social/emailgroup01-email01.png" alt="images/cyber/social/emailgroup01-email01.png"><br>  -->
+           <!--  <button class="button button-orange button-phish">phish</button> -->
+           <!-- <img src="images/cyber/social/phish-stamp.png" class="phish-stamp"> -->
+           <!-- <img src="images/cyber/social/donttrust-stamp.png" class="trust-stamp"> -->
+
+            <div>
+                <!-- <p class="">Select the phishing email.</p> -->
+                <!-- <button class="button button-orange button-trust">Trust</button>
+                <button class="button button-orange button-dont-trust">Don't Trust</button> -->
+            </div>
+
+            <!-- ngRepeat: hl in puzzle_data.diffs -->
+
+            <div class="social-callout">
+                There is no padlock or https, so this is not a secure website
+            </div>
+
+            <div class="social-callout">
+                The logo is low resolution and out of date.
+            </div>
+
+            <div class="social-callout">
+                This is the wrong font. This is a poor copy of the original website, which is a common clue for phishing websites.
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    
 
     <!-- TODO: conbine these two into one --> 
     <!-- <div class="social-modal-bg"></div>
@@ -260,67 +270,13 @@
 
 </div>
 
-<button ng-show="temp_turned_off" ng-click="challengeDone(1)" ui-sref="corp.chooser" class="ng-scope ng-hide">Challenge Controller Finished!</button>
-
-<div ng-show="isDone &amp;&amp; temp_turned_off" class="challenge-model-complete mockup one-col-cyber ng-scope ng-hide">
-    <p>[Yay! text]</p>
-
-    <!-- TODO: need the number of stars earned for this level -->
-    <p class="ng-binding">stars earned: 0</p>
-    <button ui-sref="corp.challenge.social({level:level_id, puzzle:puzzle_id})" ng-click="replayPuzzle()">replay</button><span ng-show="cur_stars == 0" class="">You have to get at least one star to continue</span>
 
 
-    <!-- TODO: need to construct link to n+1 puzzle of the current challenge -->
-    <!-- TODO: clicking the link should trigger a save of the stars for this puzzle (same as challengeDone) -->
-
-    <span ng-show="cur_stars > 0" class="ng-hide"></span>
-
-        <!-- if !puzzle %3 && cur_stars>0 then show NEXT button -->
-
-        <button ng-show="puzzle_id%3 != 0" ui-sref="corp.challenge.social({level:level_id, puzzle:puzzle_id_next})" ng-click="challengeDone(cur_stars)" class="ng-binding">Next social puzzle</button>
-
-
-    
-
-     <!-- if puzzle %3 && cur_stars>0 then show CHALLENGES button -->
-    <button ng-click="challengeDone(cur_stars)" ui-sref="corp.chooser">Challenges</button>
-
-    
-
-    <!-- TODO: if puzzle %9 then show the BATTLE button -->
-    <!-- I think that this button has been moved to the challenge chooser -->
-    <!-- <button ng-click="doBattle()" ui-sref='corp.battle.network.growth'>Battle</button> -->
-    
 </div>
 
-<!-- </div>
-<a ui-sref="newuser" class="ng-scope" href="#/newuser">&lt;&lt; Back to New-User-Screen</a></div>
-</div> -->
 
 
 
-    <script>
-        var LAB = 5,
-            GET_PROGRESS_URL = '/progress/get_progress/' + LAB + '/',
-            DO_PROGRESS_URL = '/progress/do_progress/' + LAB + '/'
-        if (document.location.hostname != 'localhost'){
-            GET_PROGRESS_URL = '/wgbh/nova/labs' + GET_PROGRESS_URL
-            DO_PROGRESS_URL = '/wgbh/nova/labs' + DO_PROGRESS_URL
-        }
-        $.getJSON(GET_PROGRESS_URL, updateProgress)
-        function DO_PROGRESS(bitId){
-            $.getJSON(DO_PROGRESS_URL + bitId + '/', updateProgress)
-        }
-
-        function updateProgress(data){
-            if (data){
-                var percent = Math.round(
-                        (data.score / data.max_score) * 100
-                    ) + '%'
-                $('#progress-complete').css({width:percent})
-            }
-        }
-    </script>
 
 
 
