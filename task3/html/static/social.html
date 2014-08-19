@@ -126,28 +126,29 @@
         <button ng-show="puzzle_state.stars > 0 &amp;&amp; puzzle_id%3 != 0" ui-sref="corp.challenge.social({level:level_id, puzzle:puzzle_id_next})" class="ng-hide">Next</button>
     </div>
 </div> -->
-    
 
+<div class="top-band">  
+
+    <div class="activity-info-box social-info-box">
+        <p>One of these emails is a phishing email. First, click on the differences between the two emails.<!--  (level 1) --></p>
+    </div>
+
+    <div class="stat-box">
+        <img src="images/cyber/social/differences-found-carrier.png">
+        <div class="stat-info">0/5</div>
+    </div>
+
+    <div class="stat-box">
+        <img src="images/cyber/social/clicks-remaining-carrier.png">
+        <div class="stat-info">10</div>
+    </div>
+
+    <button class="button button-orange button-social-next">Next</button>
+</div>
 
 <div class="social-container">
 
-    <div class="top-band">  
-        <div class="activity-info-box social-info-box">
-            <p>One of these emails is a phishing email. First, click on the differences between the two emails.<!--  (level 1) --></p>
-        </div>
-  
-        <div class="stat-box">
-            <img src="images/cyber/social/differences-found-carrier.png">
-            <div class="stat-info">0/5</div>
-        </div>
-
-        <div class="stat-box">
-            <img src="images/cyber/social/clicks-remaining-carrier.png">
-            <div class="stat-info">10</div>
-        </div>
-
-        <button class="button button-orange button-social-next">Next</button>
-    </div>
+    
 
 
     <div id="callout-canvas"></div>    
@@ -237,11 +238,11 @@
     
 
     <!-- TODO: conbine these two into one --> 
-    <!-- <div class="social-modal-bg"></div>
+    <div class="social-modal-bg"></div>
     <div class="social-modal info-box">
         You found all five differences! Now identify the phishing email
         <button class="button button-orange button-social">Next</button>
-    </div> -->
+    </div>
 <!-- 
     <div class="social-modal info-box">
         You have run out of clicks. Now identify the phishing email.
