@@ -27,8 +27,12 @@
 
 var makeHex = function(x,y) {
 	var hex = {
+		'x': (160*(x+0.5)),
+		'y': (50*(y+1)),
 		'hexShape': r.hexagon(minRad).attr({fill: colors[Math.floor(Math.random()*colors.length)], stroke:'none'}).transform('T' + (160*(x+0.5)) + ' ' + (50*(y+1))).hover(function() {this.animate({transform:'T' + (160*(x+0.5)) + ' ' + (50*(y+1)) + ' s2'}, 1000, '<>')}, function() {this.animate({transform:'T' + (160*(x+0.5)) + ' ' + (50*(y+1)) + ' s1'}, 1000, '<>')}).click(function() {this.attr({fill: colors[Math.floor(Math.random()*colors.length)], stroke:'none'})})
 	};
+	console.log(hex.hexShape.attr())
+	console.log(hex)
 
 }
 
