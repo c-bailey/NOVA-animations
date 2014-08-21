@@ -1,0 +1,504 @@
+Skip to content
+ This repository
+Explore
+Gist
+Blog
+Help
+c-bailey c-bailey
+ 
+3  Unwatch 
+  Star 0
+ Fork 0 jacobkingery/GhostFiddle
+ branch: master  GhostFiddle / views / raph.jade
+bren525 bren525 on Dec 17, 2013 removed useless code
+2 contributors  bren525  jacobkingery
+488 lines (449 sloc)  27.017 kb RawBlameHistory   
+extends layout
+
+block header_scripts
+    script(src='/javascripts/raphael.js')
+    
+
+    <script type="text/javascript">
+
+        window.onload = function() {
+
+            // Data storage
+            var lenSong = 12,
+                numGlass = 8,
+                notes = [],
+                pauses = [];
+
+            for (var i = 0; i < numGlass; i++) {
+                notes.push([]);
+                pauses.push([]);
+                for (var j = 0; j < lenSong; j++) {
+                    notes[i].push(0);
+                }
+                for (var j = 0; j < lenSong-1; j++) {
+                    pauses[i].push(0);
+                }
+            }
+
+            // Note selectors
+            var smRadius = 10,
+                lgRadius = 15,
+                rectHeight = 10,
+                horSpacing = 58,
+                vertSpacing = 50,
+                horOffset = 80,
+                vertOffset = 40,
+                noteNames = ['D', 'C#', 'B', 'A', 'G', 'F#', 'E', 'D'],
+                //fills = ['#0b7661','#0e8d74','#10a587','#12bc9a','#14d3ad','#18e9bf', '#77f2da', '#acf7c8'],
+                fills = ['#87E8D6','#FAE13C','#9D3CE8','#3CFA58','#E82F85','#493CFF','#E3710B','#EEEEEE'],
+                glasses={};
+
+            // Raphael canvas
+            var W = lenSong*horSpacing + horOffset*9,
+                H = numGlass*vertSpacing + vertOffset + 100,
+                //- W = 1460,
+                //- H = 490,
+                r = Raphael("raphHolder", W, H);
+
+            // Creating glasses and notes
+            var makeGlass = function (color) {
+                return {'glassNotes': [],
+                        'glassPause': [],
+                        'color': color,
+                        addNote: function (note) {this.glassNotes.push(note);},
+                        addPause: function (pause) {this.glassPause.push(pause);},
+                        removeNote:function(){this.glassNotes.pop().circle.hide();},
+                        removePause:function(){this.glassPause.pop().rect.hide();}
+                };                     
+            }
+            var path = r.path("M0 0L0 0").hide();
+            var makeNote = function (x,y) {
+                var newNote = 
+                    {'x':x,
+                    'y':y,
+                    'state':0,
+                    'path':path = r.path("M"+(horOffset+horSpacing*y)+" "+(vertOffset+vertSpacing*x)+"L"+(horOffset+horSpacing*y)+" "+(vertOffset+vertSpacing*x))
+                        .attr({'stroke-width':rectHeight, stroke:fills[x]})
+                        .hide()
+                        ,
+                    'circle':r.circle(horOffset+horSpacing*y, vertOffset+vertSpacing*x, smRadius)
+                        .attr({fill: fills[x], stroke: fills[x], 'stroke-width': 2, 'fill-opacity': notes[x][y], 'stroke-opacity': 1})
+                        .hover(function() {
+                            this.animate({r: lgRadius}, 100);
+                        },
+                        function() {
+                            if (!notes[newNote.x][newNote.y]){
+                                this.animate({r: smRadius}, 100);
+                            }
+                        })
+                        .drag(function(dx,dy){
+                            this.animate({r: lgRadius}, 100);
+                            var pathArray = newNote.path.attr("path");
+                            pathArray[1][1] = horOffset+horSpacing*newNote.y+dx;
+                            if(horSpacing*newNote.y+dx > horSpacing*lenSong){
+                                changeSongLength(Math.round((horSpacing*newNote.y+dx)/horSpacing)+1);
+                                lenTab.resetPlacement();
+                            }
+
+                            //pathArray[1][2] = vertOffset+vertSpacing*newNote.x+dy;
+
+                            newNote.path.attr({path:pathArray});
+                        }, function(){
+                            newNote.path.show();                                                              
+                            newNote.circle.animate({'fill-opacity' : 1}, 200);                                        
+                        }, function(){
+                            var pathArray = newNote.path.attr("path");
+                            var glassesTraversed = Math.round((pathArray[1][1]-(horOffset+horSpacing*newNote.y))/horSpacing);
+                            pathArray[1][1] = horOffset+horSpacing*(newNote.y+glassesTraversed);
+                            newNote.path.attr({path:pathArray});
+                            if(glassesTraversed < 0){
+                                for(var j = newNote.y; j>newNote.y+glassesTraversed-1 && j>=0; j--){
+                                    glasses[newNote.x].glassNotes[j].highlight();
+                                    if( j > newNote.y+glassesTraversed && j-1 >= 0){
+                                        glasses[newNote.x].glassPause[j-1].highlight();
+                                    }
+                                }
+                            }else if(glassesTraversed>0){
+                                for(var j = newNote.y; j<newNote.y+glassesTraversed+1 && j<lenSong; j++){
+                                    glasses[newNote.x].glassNotes[j].highlight();
+                                    if(j<newNote.y+glassesTraversed&&j<lenSong-1){
+                                        glasses[newNote.x].glassPause[j].highlight();
+                                    }
+                                }
+                            }else{
+                                var new_op = +!notes[newNote.x][newNote.y];
+                                notes[newNote.x][newNote.y] = new_op; 
+                                if(!new_op){
+                                    notes[newNote.x][newNote.y] = 0;                        
+                                    newNote.circle.animate({'fill-opacity' : 0}, 200);
+                                    if(newNote.y < lenSong-1)
+                                        glasses[newNote.x].glassPause[newNote.y].unhighlight();
+                                    if(newNote.y-1 >= 0){
+                                        glasses[newNote.x].glassPause[newNote.y-1].unhighlight();
+                                    }
+                                }
+                            }
+                            pathArray[1][1] = horOffset+horSpacing*newNote.y;
+                            newNote.path.attr({path:pathArray});
+                            newNote.path.hide();
+
+                            this.dx = this.dy = 0;
+                        }),
+                    'highlight': (function(){
+                        notes[newNote.x][newNote.y] = 1;                        
+                        newNote.circle.animate({'fill-opacity' : 1}, 200);
+                        newNote.circle.animate({r: lgRadius}, 100);
+                    }),
+                    'unhighlight': (function(){
+                        notes[newNote.x][newNote.y] = 0;                        
+                        newNote.circle.attr({'fill-opacity' : 0, r: smRadius});
+                    })
+                };
+                return newNote;
+            }
+            var makePause = function (x,y){
+                var newPause = 
+                    {'x':x,
+                    'y':y,
+                    'state':0,
+                    'rect':
+                    r.rect(horOffset+horSpacing*y+smRadius, vertOffset+vertSpacing*x-smRadius/2, horSpacing-2*smRadius , rectHeight)
+                    .attr({fill: fills[x], stroke: fills[x], 'fill-opacity': pauses[x][y]})
+                    .click(function () {
+                        newPause.unhighlight();
+                    })
+                    .hide(),
+                    'highlight': (function(){
+                        pauses[newPause.x][newPause.y] = 1;
+                        newPause.rect.show();
+                        newPause.rect.animate({'fill-opacity' : 1}, 200);
+                    }),
+                    'unhighlight': (function(){
+                        pauses[newPause.x][newPause.y] = 0;
+                        newPause.rect.attr({'fill-opacity' : 0});
+                        newPause.rect.hide();
+                    })
+                };
+                return newPause;   
+            }
+            for (var i = 0; i<numGlass; i++) {
+                r.text(24, vertOffset+vertSpacing*i, noteNames[i])
+                    .attr({fill: fills[i], "font-size": 36, "font-family": "Helvetica, Arial, sans-serif" });
+                glasses[i]=makeGlass(fills[i]);
+
+                for (var j = 0; j<lenSong-1; j++){
+                    glasses[i].addPause(makePause(i,j));
+                }
+                for (var j = 0; j<lenSong; j++){
+                    glasses[i].addNote(makeNote(i,j));
+                }
+            }
+            
+            //Changes the number of notes displayed
+            var changeSongLength = function(newLenSong){
+                    if (newLenSong > lenSong){
+                        if(newLenSong>100){newLenSong = 100;}
+                        for(var j = lenSong; j < newLenSong; j++){
+                            for(var i = 0; i <numGlass; i++){
+                                notes[i].push(0);
+                                pauses[i].push(0);
+                                glasses[i].addNote(makeNote(i,j));
+                                glasses[i].addPause(makePause(i,j-1));
+                            }
+                        }
+                        lenSong = newLenSong;
+                        r.setSize(9*horOffset+lenSong*horSpacing,H);  
+                    }
+                    else if(newLenSong < lenSong){
+                        if(newLenSong<1){newLenSong = 1;}
+                        for(var j = lenSong; j >newLenSong; j--){
+                            for(var i = 0; i <numGlass; i++){
+                                glasses[i].removeNote();
+                                glasses[i].removePause();
+                                notes[i].pop();
+                                pauses[i].pop();
+                            }
+                        }
+                        lenSong = newLenSong;
+                        r.setSize(9*horOffset+lenSong*horSpacing,H);                 
+                    }
+            };
+
+            //Song Length Tab
+            var tabVertOffset = vertOffset - 20;
+            var tabHorOffset = horOffset - 40;
+            var lenTab = {"path":r.path("M "+(tabHorOffset+lenSong*horSpacing-5)+" "+(tabVertOffset-10)+
+                               " L "+(tabHorOffset+lenSong*horSpacing-5)+" "+(tabVertOffset-5)+ 
+                               " L "+(tabHorOffset+lenSong*horSpacing)+" "+(tabVertOffset)+ 
+                               " L "+(tabHorOffset+lenSong*horSpacing+5)+" "+(tabVertOffset-5)+ 
+                               " L "+(tabHorOffset+lenSong*horSpacing+5)+" "+(tabVertOffset-10)+" Z")
+                        .attr({'stroke-width':rectHeight, stroke:'#FFFFFF'})
+                        .drag(function(dx,dy){
+                                var pathArray = this.attr("path");
+
+                                pathArray[0][1] = this.cx+dx - 5;
+                                pathArray[1][1] = this.cx+dx - 5;
+                                pathArray[2][1] = this.cx+dx;
+                                pathArray[3][1] = this.cx+dx + 5;
+                                pathArray[4][1] = this.cx+dx + 5;
+                                this.attr({path:pathArray});
+                                if(horSpacing*this.cx+dx > horSpacing*lenSong){
+                                    changeSongLength(Math.round((this.cx+dx )/horSpacing)-1);
+                                }
+                            },function(){
+                                var pathArray = this.attr("path");
+                                this.cx = pathArray[2][1];
+                            },function(){
+                                var pathArray = this.attr("path");
+                                pathArray[0][1] = tabHorOffset+lenSong*horSpacing - 5;
+                                pathArray[1][1] = tabHorOffset+lenSong*horSpacing - 5;
+                                pathArray[2][1] = tabHorOffset+lenSong*horSpacing;
+                                pathArray[3][1] = tabHorOffset+lenSong*horSpacing + 5;
+                                pathArray[4][1] = tabHorOffset+lenSong*horSpacing + 5;
+                                this.attr({path:pathArray});
+                            }),
+                            "resetPlacement": (function(){
+                                var pathArray = this.path.attr("path");
+                                pathArray[0][1] = tabHorOffset+lenSong*horSpacing - 5;
+                                pathArray[1][1] = tabHorOffset+lenSong*horSpacing - 5;
+                                pathArray[2][1] = tabHorOffset+lenSong*horSpacing;
+                                pathArray[3][1] = tabHorOffset+lenSong*horSpacing + 5;
+                                pathArray[4][1] = tabHorOffset+lenSong*horSpacing + 5;
+                                this.path.attr({path:pathArray});
+                            })
+                        };
+
+            // Reset function
+            var resetAll = function() {
+                for (var i = 0; i < numGlass; i++){
+                    for (var j = 0; j < lenSong; j++){
+                        glasses[i].glassNotes[j].unhighlight();
+                        if (j < lenSong - 1) {glasses[i].glassPause[j].unhighlight();}
+                    }
+                }
+            }
+
+            // Submit button
+            var subBtnVertOffset = vertOffset + numGlass*vertSpacing,
+                subBtnHorOffset = 50,
+                subBtnWidth = 210,
+                subBtnHeight = 60,
+                subBtnRadius = 20;
+
+            var subRect = r.rect(subBtnHorOffset, subBtnVertOffset, subBtnWidth, subBtnHeight, subBtnRadius)
+                .attr({fill: "#3C850C", stroke: "#326E09", 'stroke-width': 2, 'fill-opacity': .75, 'stroke-opacity': 1});                
+
+            var subText = r.text(subBtnHorOffset + subBtnWidth/2, subBtnVertOffset + subBtnHeight/2, "Submit Song!")
+                .attr({fill: "#FFFFFF", "font-size": 32, "font-family": "Helvetica, Arial, sans-serif" });
+            var subButton = r.set();
+            subButton.push(subRect);
+            subButton.push(subText);
+
+            subButton.hover(function() {
+                this.attr({cursor: "pointer"});
+                subRect.animate({'fill-opacity' : 1}, 200);
+                },
+                function() {
+                this.attr({cursor: "default"});
+                subRect.animate({'fill-opacity' : .75}, 200);
+                });
+
+            subButton.click(function() {
+                var n = "";
+                var p = "";
+                var firstNote = 0;
+                var lastNote = 0;
+                var foundFirst = 0;
+
+                for (var j = 0; j < lenSong; j++){
+                    for (var i = 0; i < numGlass; i++){
+                        if (notes[i][j] && !foundFirst) {firstNote = j;
+                            foundFirst = 1;};
+                        if (notes[i][j]) {lastNote = j};
+                    }
+                }
+
+                for (var i = 0; i < numGlass; i++){
+                    n += notes[i].join('').slice(firstNote, lastNote+1)+"\n";
+                    p += pauses[i].join('').slice(firstNote, lastNote)+"\n";                
+                }
+                console.log(n);
+                console.log(p);
+                document.getElementById('notes').value = n;
+                document.getElementById('pauses').value = p;
+                document.getElementById('newSong').submit();
+            });
+            // Load Song
+            var loadSong = function(song){
+                changeSongLength(Math.floor((song[0].length+1)/2));
+                lenTab.resetPlacement();
+                for (i=0; i<song.length; i++) {
+                    var realJ = 0;
+                    for (j=0; j<song[i].length; j+=2) {
+                        noteij = +song[i][j];
+                        if (noteij) {glasses[i].glassNotes[realJ].highlight();}
+                        if (j < song[i].length-1) {
+                            pauseij = +song[i][j+1];
+                            if (pauseij) {glasses[i].glassPause[realJ].highlight();}
+                        }
+                        realJ += 1;
+                    }
+                }
+            };
+
+            // Reset button
+            var resBtnVertOffset = subBtnVertOffset,
+                resBtnHorOffset = subBtnHorOffset + subBtnWidth + horSpacing
+                resBtnWidth = 100,
+                resBtnHeight = 60,
+                resBtnRadius = 20;
+
+            var resRect = r.rect(resBtnHorOffset, resBtnVertOffset, resBtnWidth, resBtnHeight, resBtnRadius)
+                .attr({fill: "#FF0000", stroke: "#FA0000", 'stroke-width': 2, 'fill-opacity': .75, 'stroke-opacity': 1});                
+            var resText = r.text(resBtnHorOffset + resBtnWidth/2, resBtnVertOffset + resBtnHeight/2, "Reset")
+                .attr({fill: "#FFFFFF", "font-size": 32, "font-family": "Helvetica, Arial, sans-serif" });
+            var resButton = r.set();
+            resButton.push(resRect);
+            resButton.push(resText);
+
+            resButton.hover(function() {
+                this.attr({cursor: "pointer"});
+                resRect.animate({'fill-opacity' : 1}, 200);
+                },
+                function() {
+                this.attr({cursor: "default"});
+                resRect.animate({'fill-opacity' : .75}, 200);
+                });
+
+            resButton.click(function() {resetAll()});
+
+            // Preset button
+            var preBtnVertOffset = subBtnVertOffset,
+                preBtnHorOffset = subBtnHorOffset + subBtnWidth + resBtnWidth + 2*horSpacing
+                preBtnWidth = 240,
+                preBtnHeight = subBtnHeight,
+                preBtnRadius = subBtnRadius;
+
+            var preRect = r.rect(preBtnHorOffset, preBtnVertOffset, preBtnWidth, preBtnHeight, preBtnRadius)
+                .attr({fill: "#0000FF", stroke: "#0000FA", 'stroke-width': 2, 'fill-opacity': .75, 'stroke-opacity': 1});                
+            var preText = r.text(preBtnHorOffset + preBtnWidth/2, preBtnVertOffset + preBtnHeight/2, "Random Preset")
+                .attr({fill: "#FFFFFF", "font-size": 32, "font-family": "Helvetica, Arial, sans-serif" });
+            var preButton = r.set();
+            preButton.push(preRect);
+            preButton.push(preText);
+
+            preButton.hover(function() {
+                this.attr({cursor: "pointer"});
+                preRect.animate({'fill-opacity' : 1}, 200);
+                },
+                function() {
+                this.attr({cursor: "default"});
+                preRect.animate({'fill-opacity' : .75}, 200);
+                });
+            
+            preButton.click(function() {
+                var presets = [["0000000000000010001000100000000000000",
+                    "0000000000001000100010001000000000000",
+                    "0000000000100010001000100010000000000",
+                    "0000000010001000100010001000100000000",
+                    "0000001000100010000000100010001000000",
+                    "0000100010001000000000001000100010000",
+                    "0010001000100000000000000010001000100",
+                    "1000100010000000000000000000111111111"], 
+                    ["00000011111",
+                    "00000000000",
+                    "00000000000",
+                    "00001111111",
+                    "00000000000",
+                    "00111111111",
+                    "00000000000",
+                    "11111111111"], 
+                    ["00000000000000000000000000000000000000000000000",
+                    "11100000000011100000000011100000000000000000000",
+                    "00001110000000001110000000000000000000000000000",
+                    "00000000000000000000000000000000000000000000000",
+                    "00000000111000000000111000000000000000000000000",
+                    "00000000000000000000000000001000111111111111111",
+                    "00000000000000000000000000000010000000000000000",
+                    "00000000000000000000000000000000000000000000000"],
+                    ["000000000000000000000000000000000000000000000000000000111000000000000000000",
+                    "000000000000000000000000000000000000000000000000111110000000000000000000000",
+                    "000000000000000000000000000000000000000000111110000000000000000000000000000",
+                    "000000111110000000000000000000000000000010000000000000000000000000000000000",
+                    "000000000000000000000011111000000000000000000000000000000000001000000000000",
+                    "000000000000000000001000000011111000000000000000000000000000100011100000000",
+                    "000000000000000000100000000000000011111000000000000000000010000000001110000",
+                    "111110000000111110000000000000000000000000000000000000000000000000000000111"],
+                    ["0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                    "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                    "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                    "0000000000000000001000000000000000000000000000000000000000001110000000000000000000100000000000000000000000000000101000000000000",
+                    "0000000000000000000000000000000010101010100000000000000000000000000000000000000000000000000000001010101010000000000010000000000",
+                    "1010111010101110100000001111111000000000001010101000001000000000101011101010111010000000111111100000000000101010000000000000000",
+                    "0000000000000000000000100000000000000000000000000010100011100000000000000000000000000010000000000000000000000000000000100000000",
+                    "0000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000001111111"],
+                    ["00000000000000000000000000000000000000111111111000111010000000000000000000000000000000000000000",
+                    "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                    "00000010111000000000000000000010111000000000000010000000000000000000000000000010111000000000000",
+                    "00000000000010000000000000000000000010000000000000000000000000000000000000000000000010000000000",
+                    "00111000000000111000000000111000000000000000000000000000111000000000000000111000000000111111111",
+                    "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                    "00000000000000000010000000000000000000000000000000000000000000111010000010000000000000000000000",
+                    "10000000000000000000111010000000000000000000000000000000000010000000111000000000000000000000000"],
+                    ["00000000000000000000000000000000000000000000111110100000000000000011100000000000000000000000000011100000000000000000000",
+                    "00000000000000000000000000000000000011111110000000000000000000000000001000000000000000000000000000001000000000000000000",
+                    "00001000000000000010000000000000000000000000000000000000001111101000000010000010000000001111101000000010000010000000000",
+                    "11100010000000111000100000000000000000000000000000001111100000000000000000111000100000000000000000000000111000100000000",
+                    "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                    "00000000111110000000001111100000000000000000000000000000000000000000000000000000001111100000000000000000000000001111111",
+                    "00000000000000000000000000001111101000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                    "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"],
+                    ["000000000000001111111010000000000000000000000000000000000",
+                    "000000000000100000000000100000000000000011101111100000000",
+                    "000000000010001111111010001000000000001000000000001111111",
+                    "111111101000100000000000100011111110100011101111100000000",
+                    "000000000010001111111010001000000000001000000000001111111",
+                    "111111101000100000000000100011111110100011101111100000000",
+                    "000000000010000000000000001000000000001000000000001111111",
+                    "111111101000000000000000000011111110100000000000000000000"],
+                    ["000000000000000000000000000000000000000000000000000000000000000",
+                    "000000000000000000000000000000000000000000000000000000000000000",
+                    "001000000000000000000000000000000010000000000000000000000000000",
+                    "100010000000111000000000000011101000100000001110000011100000000",
+                    "000000100010000000001110001000000000001000100000000000000000000",
+                    "000000001000000000100000100000000000000010000000000000001000000",
+                    "000000000000000010000000000000000000000000000000111000000000000",
+                    "000000000000000000000000000000000000000000000000000000000011111"]
+                    ];
+
+                resetAll();
+                var randInt = Math.floor(Math.random() * presets.length);
+                var preset = presets[randInt];
+                loadSong(preset);
+                
+            });
+
+        };
+        </script>
+
+
+block content
+
+    img(src="/images/smokeGhost.jpg", id="logo")
+    div(id="intro")
+        <h3><strong>Welcome to Ghost Fiddle</strong>, the site that allows you to compose a simple song for our wine glass playing robot!</h3>
+        <p>To get started composing your song check out any of the following options:</p>
+        <ul>
+        <li>Click on circles to fill in notes.</li>
+        <li>Click and drag to create sustained notes.</li>
+        <li>Click on filled in circles or lines to remove unwanted notes.</li>
+        <li>Drag the white tab to lengthen or shorten your composition</li>
+        </ul>
+    div(id="raphHolder")
+    div(id="formHolder")
+        form(id="newSong", method="post", action="/submit")
+            input(id="notes", type="hidden", name="notes")
+            input(id="pauses", type="hidden", name="pauses")
+    //- div(id="footer")
+        | <b><a href='http://github.com/jacobkingery/GhostFiddle' style='color: #111;'>Team Ghost Fiddle</a></b>
+Status API Training Shop Blog About © 2014 GitHub, Inc. Terms Privacy Security Contact 

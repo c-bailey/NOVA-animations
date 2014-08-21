@@ -1,0 +1,88 @@
+<html>
+<body>
+<script src="raphael-min.js"></script>
+<div id="foo" style="background-color:#fff"></div>
+<script>
+
+    var r = Raphael('foo', 1009, 633),
+    	minRad = 50,
+    	hexes=[],
+    	hexesX=[],
+    	hexesY=[],
+    	j=0,
+    	k=0,
+    	colors=['5ed6c9','1ca495','04655b','7d72de','4133b6','1d1371','c4f76c','a5ed29','619706'] ;
+
+    Raphael.fn.hexagon = function(radius) {
+		var path = ""
+		for (var i = 0; i <= 6; i++) {
+	  	var a = i * 60,
+	  	    x = radius * Math.cos(a * Math.PI / 180),
+	  	    y = radius * Math.sin(a * Math.PI / 180);
+	  	path += (i == 0 ? "M" : "L") + x + "," + y}
+		path += "Z"
+		return this.path(path)
+	}
+
+	// for (var i = 0; i <50; i++) {
+	// 	hexes.push(r.hexagon(minRad));
+	// 	randomfill=colors[Math.floor(Math.random()*colors.length)]
+	// 	hexes[i].attr({fill: randomfill, stroke:'none'});
+	// 	hexesX.push(160*(k+0.5));
+	// 	hexesY.push(50*(j+1));
+	// 	hexes[i].transform('T' + hexesX[i] + ' ' + hexesY[i]);
+	// 	// hexes[i].hover(function() {
+	// 	// 	this.animate({transform: 'T' + hexesX[i] + ' ' + hexesY[i] + ' s3'},1000)
+	// 	// 	console.log(i)
+	// 	// })
+	// 	hexes[i].click(function() {
+	// 		randomfill=colors[Math.floor(Math.random()*colors.length)];
+	// 		hexes[i-1].attr({fill: randomfill, stroke:'none'});
+	// 	})
+
+	// 	if (i%5 == 4) {
+	// 		console.log(i)
+	// 		j++;
+	// 		if ((i%10)%2 == 0) {
+	// 			k=0.5;
+	// 			console.log('reset 0.5  '+i)
+	// 		} else {
+	// 			k=0;
+	// 			console.log('reset 0')
+	// 		}
+	// 	} else {
+	// 		k++;
+	// 	}		
+	// };
+
+
+var makeHex = function(x,y) {
+	var hex = {
+		'randomfill': colors[Math.floor(Math.random()*colors.length)],
+		'hexShape': r.hexagon(minRad).attr({fill: this.randomfill, stroke:'none'}).transform('T' + (160*(x+0.5)) + ' ' + (50*(y+1))).hover(function() {this.animate({transform:'T' + (160*(x+0.5)) + ' ' + (50*(y+1)) + ' s3'})})
+	};
+
+	console.log('hex created  ' + hex.hexShape);
+}
+
+for (var i = 0; i <50; i++) {
+		hexes.push(makeHex(i,j));
+
+		if (i%5 == 4) {
+			j++;
+			if ((i%10)%2 == 0) {
+				k=0.5;
+			} else {
+				k=0;
+			}
+		} else {
+			k++;
+		}		
+	};
+
+
+
+
+</script>
+</body>
+</html>
