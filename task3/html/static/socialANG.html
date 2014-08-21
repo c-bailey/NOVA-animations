@@ -34,7 +34,7 @@
 
 	<div class="social-container">
 
-		<div ng-repeat="phish in puzzle_data.phish" ng-class="{audiocontent:puzzle_data.type=='audio', socialcorrect: !phish.fake && (puzzle_state.complete || puzzle_state.fake_complete)}" class="social-content">
+		<div ng-repeat="phish in puzzle_data.phish" ng-class="{audiocontent:puzzle_data.type=='audio', socialcorrect: !phish.fake && (puzzle_state.complete || puzzle_state.fake_complete), audiopush:puzzle_data.type=='audio' && (puzzle_state.complete || puzzle_state.fake_complete)}" class="social-content">
 
 			<div ng-show="puzzle_data.type=='audio'" class="audio-box activity-content-box">
 				<p>Listen:</p>
@@ -63,7 +63,8 @@
 
 	<!-- TODO: combine these two into one --> 
 
-		<div class="modal-bg-color" ng-show="(puzzle_state.diff_complete || puzzle_state.diff_failed && !puzzle_state.fake_start && !puzzle_state.complete) || puzzle_state.fake_complete"></div>
+		<div class="modal-bg-color" ng-show="((puzzle_state.diff_complete || puzzle_state.diff_failed) && !puzzle_state.fake_start && !puzzle_state.complete) || puzzle_state.fake_complete"></div>
+
 		<div class="social-modal info-box" ng-show="puzzle_state.diff_complete && !puzzle_state.fake_start && !puzzle_state.complete">
 			{{puzzle_data.interstitial_complete}}
 			<button ng-click="start_fake()" class="button button-orange button-social">Next</button>

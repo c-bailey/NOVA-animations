@@ -195,3 +195,34 @@
 	top: 42px;
 	left: 857px;
 }
+
+
+/*SLIDE AUDIO RIGHT*/
+
+.audiopush {
+	animation: push-over 2s;
+    -webkit-animation: push-over 2s;
+    -o-animation: push-over 2s;
+    -moz-animation: push-over 2s;
+    margin-left: 503px;
+}
+
+@keyframes push-over {
+	from {margin-left: 263px;}
+	to {margin-left: 503px; }
+}
+
+@-webkit-keyframes push-over {
+	from {margin-left: 263px;}
+	to {margin-left: 503px; }
+}
+
+@-o-keyframes push-over {
+	from {margin-left: 263px;}
+	to {margin-left: 503px; }
+}
+
+@-moz-keyframes push-over {
+	from {margin-left: 263px;}
+	to {margin-left: 503px; }
+}

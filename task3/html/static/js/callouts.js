@@ -1,4 +1,4 @@
-var r = Raphael('callout-canvas', 1009, 633),
+var r = Raphael('callout-canvas', 1009, 800),
 		originT = $('#callout-canvas').offset().top , 
 		originL = $('#callout-canvas').offset().left ,
 		htops = [] ,
@@ -44,5 +44,10 @@ var connectCallouts = function() {
 	//END
 
 }
+
+
+var resetScrolls = function() {
+	$('.social-container').animate({scrollTop: '0'},2000)
+};
 
 
