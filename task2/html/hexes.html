@@ -24,49 +24,17 @@
 		return this.path(path)
 	}
 
-	// for (var i = 0; i <50; i++) {
-	// 	hexes.push(r.hexagon(minRad));
-	// 	randomfill=colors[Math.floor(Math.random()*colors.length)]
-	// 	hexes[i].attr({fill: randomfill, stroke:'none'});
-	// 	hexesX.push(160*(k+0.5));
-	// 	hexesY.push(50*(j+1));
-	// 	hexes[i].transform('T' + hexesX[i] + ' ' + hexesY[i]);
-	// 	// hexes[i].hover(function() {
-	// 	// 	this.animate({transform: 'T' + hexesX[i] + ' ' + hexesY[i] + ' s3'},1000)
-	// 	// 	console.log(i)
-	// 	// })
-	// 	hexes[i].click(function() {
-	// 		randomfill=colors[Math.floor(Math.random()*colors.length)];
-	// 		hexes[i-1].attr({fill: randomfill, stroke:'none'});
-	// 	})
-
-	// 	if (i%5 == 4) {
-	// 		console.log(i)
-	// 		j++;
-	// 		if ((i%10)%2 == 0) {
-	// 			k=0.5;
-	// 			console.log('reset 0.5  '+i)
-	// 		} else {
-	// 			k=0;
-	// 			console.log('reset 0')
-	// 		}
-	// 	} else {
-	// 		k++;
-	// 	}		
-	// };
-
 
 var makeHex = function(x,y) {
 	var hex = {
-		'randomfill': colors[Math.floor(Math.random()*colors.length)],
-		'hexShape': r.hexagon(minRad).attr({fill: this.randomfill, stroke:'none'}).transform('T' + (160*(x+0.5)) + ' ' + (50*(y+1))).hover(function() {this.animate({transform:'T' + (160*(x+0.5)) + ' ' + (50*(y+1)) + ' s3'})})
+		'hexShape': r.hexagon(minRad).attr({fill: colors[Math.floor(Math.random()*colors.length)], stroke:'none'}).transform('T' + (160*(x+0.5)) + ' ' + (50*(y+1))).hover(function() {this.animate({transform:'T' + (160*(x+0.5)) + ' ' + (50*(y+1)) + ' s2'}, 1000, '<>')}, function() {this.animate({transform:'T' + (160*(x+0.5)) + ' ' + (50*(y+1)) + ' s1'}, 1000, '<>')}).click(function() {this.attr({fill: colors[Math.floor(Math.random()*colors.length)], stroke:'none'})})
 	};
 
-	console.log('hex created  ' + hex.hexShape);
+	console.log('hex created  ' + hex.randomfill);
 }
 
 for (var i = 0; i <50; i++) {
-		hexes.push(makeHex(i,j));
+		hexes.push(makeHex(k,j));
 
 		if (i%5 == 4) {
 			j++;
