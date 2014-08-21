@@ -1,22 +1,7 @@
-Skip to content
- This repository
-Explore
-Gist
-Blog
-Help
-c-bailey c-bailey
- 
-3  Unwatch 
-  Star 0
- Fork 0 jacobkingery/GhostFiddle
- branch: master  GhostFiddle / views / raph.jade
-bren525 bren525 on Dec 17, 2013 removed useless code
-2 contributors  bren525  jacobkingery
-488 lines (449 sloc)  27.017 kb RawBlameHistory   
-extends layout
+<!DOCTYPE html>
+<head>
 
-block header_scripts
-    script(src='/javascripts/raphael.js')
+    <script src='raphael-min.js'></script>
     
 
     <script type="text/javascript">
@@ -480,25 +465,9 @@ block header_scripts
 
         };
         </script>
+        </head>
 
 
-block content
-
-    img(src="/images/smokeGhost.jpg", id="logo")
-    div(id="intro")
-        <h3><strong>Welcome to Ghost Fiddle</strong>, the site that allows you to compose a simple song for our wine glass playing robot!</h3>
-        <p>To get started composing your song check out any of the following options:</p>
-        <ul>
-        <li>Click on circles to fill in notes.</li>
-        <li>Click and drag to create sustained notes.</li>
-        <li>Click on filled in circles or lines to remove unwanted notes.</li>
-        <li>Drag the white tab to lengthen or shorten your composition</li>
-        </ul>
-    div(id="raphHolder")
-    div(id="formHolder")
-        form(id="newSong", method="post", action="/submit")
-            input(id="notes", type="hidden", name="notes")
-            input(id="pauses", type="hidden", name="pauses")
-    //- div(id="footer")
-        | <b><a href='http://github.com/jacobkingery/GhostFiddle' style='color: #111;'>Team Ghost Fiddle</a></b>
-Status API Training Shop Blog About © 2014 GitHub, Inc. Terms Privacy Security Contact 
+<body>
+    <div id="raphHolder"></div>
+</body>
